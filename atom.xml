@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://newbe1.github.io/</id>
     <title>YAN · RUI</title>
-    <updated>2020-01-12T10:13:43.530Z</updated>
+    <updated>2020-01-12T10:56:44.804Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://newbe1.github.io/"/>
     <link rel="self" href="https://newbe1.github.io/atom.xml"/>
@@ -11,100 +11,12 @@
     <icon>https://newbe1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, YAN · RUI</rights>
     <entry>
-        <title type="html"><![CDATA[摘抄]]></title>
-        <id>https://newbe1.github.io/post/ma-ma</id>
-        <link href="https://newbe1.github.io/post/ma-ma">
+        <title type="html"><![CDATA[数据库]]></title>
+        <id>https://newbe1.github.io/post/shu-ju-ku</id>
+        <link href="https://newbe1.github.io/post/shu-ju-ku">
         </link>
-        <updated>2020-01-12T09:48:41.000Z</updated>
-        <content type="html"><![CDATA[<p>“从小觉得最厉害的人就是妈妈，不怕黑，什么都知道，做好吃的饭，把生活打理得井井有条，哭着不知道怎么办时只好找她。可我好像忘了这个被我依靠的人也曾是个小姑娘，怕黑也掉眼泪，笨手笨脚会被针扎到手。最美的姑娘，是什么让你变得这么强大呢，是岁月，还是爱。”——德卡先生的信箱</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[霸王别姬]]></title>
-        <id>https://newbe1.github.io/post/hdfgh</id>
-        <link href="https://newbe1.github.io/post/hdfgh">
-        </link>
-        <updated>2020-01-12T09:28:56.000Z</updated>
-        <content type="html"><![CDATA[<p>他是假霸王,你是真虞姬</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[我的博客]]></title>
-        <id>https://newbe1.github.io/post/wo-de-bo-ke</id>
-        <link href="https://newbe1.github.io/post/wo-de-bo-ke">
-        </link>
-        <updated>2020-01-11T10:52:55.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="java数据类型">Java数据类型</h2>
-<h3 id="short"><strong>short</strong></h3>
-<p>对于short s1 = 1; s1 = s1 + 1; 由于s1+1运算时会自动提升表达式的类型，所以结果是int型，再赋值给short类型s1时，编译器将报告需要强制转换类型的错误</p>
-<p>short s1 = 1; s1 += 1;由于 += 是java语言规定的运算符，java编译器会对它进行特殊处理，因此可以正确编译。</p>
-<h3 id="char"><strong>char</strong></h3>
-<p>char是用来存储Unicode编码的字符的  Unicode中包含了汉字</p>
-<p><strong>&lt;&lt;</strong></p>
-<p>将一个数左移n位就是乘以2的n次方  &lt;&lt;位运算是cpu支持的 效率最高</p>
-<h3 id="final"><strong>final</strong></h3>
-<p>final修饰的类不能被继承</p>
-<p>final修饰变量时 引用变量不能变 引用对象指向的对象中的内容是可变的</p>
-<p><em>java.lang:</em></p>
-<p>Boolean Short Integer Long Float String Double Byte void  (八大类型的包装类加一个void 都是被final修饰的)</p>
-<p><em>java.util:</em></p>
-<p>UUID Scanner</p>
-<h3 id="string">string</h3>
-<p>String 中对象是不可变的  线程安全</p>
-<p>StringBuffer方法中加了同步锁 线程安全</p>
-<p>StringBuilder 方法中没有同步锁  线程不安全</p>
-<p>操作少量数据用String</p>
-<p>单线程操作大量数据用StringBuilder</p>
-<p>多线程操作大量数据用StringBuffer</p>
-<h2 id="集合">集合</h2>
-<p>ArrayList和LinkedList 不是同步的  线程不安全</p>
-<p>ArrayList底层使用数组 LinkedList底层是双向链表</p>
-<p>ArrayList的增删受时间复杂度影响 LinkedList则不受（不支持高效的随机元素访问）</p>
-<h3 id="hashtable">HashTable</h3>
-<p>HashTable底层是数组和链表结合在一起实现的，key和value都不能为null（空指针异常），线程安全（修改数据时锁住整个HashTable）效率低，ConcurrentHashMap做了相关优化</p>
-<h3 id="hashmap">HashMap</h3>
-<p>底层是数组和链表实现的，key和value都可以为null，线程不安全</p>
-<h3 id="concurrenthashmap">ConcurrentHashMap</h3>
-<p>底层采用数组和链表实现，线程安全，key和value不能为null（空指针异常）</p>
-<h3 id="线程池的优势"><strong>线程池的优势</strong></h3>
-<p>降低资源消耗   通过重复利用已创建的线程降低线程创建消耗的资源</p>
-<p>提高响应速度 当任务到达时不需等待线程就可以立即执行</p>
-<p>提高线程的可管理性  使用线程池统一分配管理和优化</p>
-<h2 id="java网络">Java网络</h2>
-<h3 id="osi七层模型"><strong>osi七层模型</strong></h3>
-<p>物理层</p>
-<p>数据链路层</p>
-<p>网络层</p>
-<p>传输层</p>
-<p>会话层</p>
-<p>表示层</p>
-<p>应用层</p>
-<h3 id="输入url显示主页的过程"><strong>输入url显示主页的过程</strong></h3>
-<p>DNS解析</p>
-<p>TCP连接</p>
-<p>发送HTTP请求</p>
-<p>服务器处理请求返回一个HTML</p>
-<p>浏览器渲染页面</p>
-<p>链接结束</p>
-<h3 id="tcp三次握手"><strong>TCP三次握手</strong></h3>
-<p>客户端发送带有SYN的数据包</p>
-<p>服务端发送带有SYN/ACK的数据包</p>
-<p>客户端发送带有ACK的数据包</p>
-<p>建立可靠的通信信道  确认接受和发送都正常</p>
-<p>SNY确认发送发到接受方的通信美问题 ACK确认接收方到发送方的通道美问题</p>
-<h3 id="断开连接需四次挥手"><strong>断开连接需四次挥手</strong></h3>
-<p>客户端发送一个FIN 关闭数据传送</p>
-<p>服务端收到FIN发送一个ACK</p>
-<p>服务端关闭连接 发送一个FIN给客户端</p>
-<p>客户端发送一个ACK确认关闭</p>
-<h2 id="服务器相关">服务器相关</h2>
-<h3 id="tomcat和nginx">Tomcat和Nginx</h3>
-<p>Nginx在均衡负载里属于前端服务器，用来处理请求的转发（反向代理）；属于静态页面服务器，大部分时间不会运行项目。</p>
-<p>Tomcat是后端服务器，属于Java servlet容器，用来生成动态页面，直接运行项目。（发送一个请求，先经过Nginx，它会合理地将请求分配到后台比较不忙的Tomcat，Tomcat 处理好请求会将数据返回给Nginx，然后Nginx将数据返回给浏览器进行显示，如果是一些静态数据，Nginx会直接处理）</p>
-<p>Tomcat/Jetty 等都是Web 容器，负责管理整个Servlet的生命周期。类似Spring 的IOC会管理整个Bean的生命周期。 而GlassFish/Weblogic这一类的 application Server，则会管理更多，包含命名服务器，EJB等资源。</p>
-<p>Nginx/apache 可以说是web server ，它们可以处理静态资源，无法处理servlet，一般把Nginx放在前端处理静态资源，如果有对应的Servlet请求，则通过AJP转给后端服务器处理</p>
-<p>“tomcat用在java后台程序上，java后台程序难道不能用apache和nginx吗？”不能。apache和nginx不是servlet容器。什么是servlet容器呢？即实现HttpServletRequest、HttpServletResponse、HttpSession等等接口，解析http请求，通过类加载器加载对应的servlet实现类并调用。也就是说servlet容器必须由java或者基于jvm的语言实现。</p>
-<h2 id="数据库">数据库</h2>
+        <updated>2020-01-12T10:49:52.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="数据库">数据库</h2>
 <h3 id="数据库性能优化"><strong>数据库性能优化</strong></h3>
 <p><em>sql优化</em>：</p>
 <p>​			少使用select*；</p>
@@ -220,6 +132,124 @@
 <p>5.—-添加外键约束 (主表stuInfo和从表stuMarks建立关系，关联字段stuNo)</p>
 <p>alter table stuInfo</p>
 <p>add constraint FK_stuNo foreign key(stuNo)references stuinfo(stuNo)</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[linux]]></title>
+        <id>https://newbe1.github.io/post/linux</id>
+        <link href="https://newbe1.github.io/post/linux">
+        </link>
+        <updated>2020-01-12T10:49:20.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="linux">Linux</h1>
+<h2 id="简单的脚本书写">简单的脚本书写</h2>
+<pre><code class="language-vi">vi start.sh
+
+编写脚本 保存退出
+
+chmod +x start.sh   赋权使其可执行
+
+./start.sh 执行脚本
+</code></pre>
+<h2 id="文件-赋权">文件  赋权</h2>
+<pre><code class="language-chown">chown user:market f01　　//把文件f01的主改为uesr，添加到market组
+chown -R liu /usr/meng  //将目录/usr/meng及其下面的所有文件、子目录的文件主改成 liu：
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[摘抄]]></title>
+        <id>https://newbe1.github.io/post/ma-ma</id>
+        <link href="https://newbe1.github.io/post/ma-ma">
+        </link>
+        <updated>2020-01-12T09:48:41.000Z</updated>
+        <content type="html"><![CDATA[<p>“从小觉得最厉害的人就是妈妈，不怕黑，什么都知道，做好吃的饭，把生活打理得井井有条，哭着不知道怎么办时只好找她。可我好像忘了这个被我依靠的人也曾是个小姑娘，怕黑也掉眼泪，笨手笨脚会被针扎到手。最美的姑娘，是什么让你变得这么强大呢，是岁月，还是爱。”——德卡先生的信箱</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[霸王别姬]]></title>
+        <id>https://newbe1.github.io/post/hdfgh</id>
+        <link href="https://newbe1.github.io/post/hdfgh">
+        </link>
+        <updated>2020-01-12T09:28:56.000Z</updated>
+        <content type="html"><![CDATA[<p>他是假霸王,你是真虞姬</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Java]]></title>
+        <id>https://newbe1.github.io/post/wo-de-bo-ke</id>
+        <link href="https://newbe1.github.io/post/wo-de-bo-ke">
+        </link>
+        <updated>2020-01-11T10:52:55.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="java数据类型">Java数据类型</h2>
+<h3 id="short"><strong>short</strong></h3>
+<p>对于short s1 = 1; s1 = s1 + 1; 由于s1+1运算时会自动提升表达式的类型，所以结果是int型，再赋值给short类型s1时，编译器将报告需要强制转换类型的错误</p>
+<p>short s1 = 1; s1 += 1;由于 += 是java语言规定的运算符，java编译器会对它进行特殊处理，因此可以正确编译。</p>
+<h3 id="char"><strong>char</strong></h3>
+<p>char是用来存储Unicode编码的字符的  Unicode中包含了汉字</p>
+<p><strong>&lt;&lt;</strong></p>
+<p>将一个数左移n位就是乘以2的n次方  &lt;&lt;位运算是cpu支持的 效率最高</p>
+<h3 id="final"><strong>final</strong></h3>
+<p>final修饰的类不能被继承</p>
+<p>final修饰变量时 引用变量不能变 引用对象指向的对象中的内容是可变的</p>
+<p><em>java.lang:</em></p>
+<p>Boolean Short Integer Long Float String Double Byte void  (八大类型的包装类加一个void 都是被final修饰的)</p>
+<p><em>java.util:</em></p>
+<p>UUID Scanner</p>
+<h3 id="string">string</h3>
+<p>String 中对象是不可变的  线程安全</p>
+<p>StringBuffer方法中加了同步锁 线程安全</p>
+<p>StringBuilder 方法中没有同步锁  线程不安全</p>
+<p>操作少量数据用String</p>
+<p>单线程操作大量数据用StringBuilder</p>
+<p>多线程操作大量数据用StringBuffer</p>
+<h2 id="集合">集合</h2>
+<p>ArrayList和LinkedList 不是同步的  线程不安全</p>
+<p>ArrayList底层使用数组 LinkedList底层是双向链表</p>
+<p>ArrayList的增删受时间复杂度影响 LinkedList则不受（不支持高效的随机元素访问）</p>
+<h3 id="hashtable">HashTable</h3>
+<p>HashTable底层是数组和链表结合在一起实现的，key和value都不能为null（空指针异常），线程安全（修改数据时锁住整个HashTable）效率低，ConcurrentHashMap做了相关优化</p>
+<h3 id="hashmap">HashMap</h3>
+<p>底层是数组和链表实现的，key和value都可以为null，线程不安全</p>
+<h3 id="concurrenthashmap">ConcurrentHashMap</h3>
+<p>底层采用数组和链表实现，线程安全，key和value不能为null（空指针异常）</p>
+<h3 id="线程池的优势"><strong>线程池的优势</strong></h3>
+<p>降低资源消耗   通过重复利用已创建的线程降低线程创建消耗的资源</p>
+<p>提高响应速度 当任务到达时不需等待线程就可以立即执行</p>
+<p>提高线程的可管理性  使用线程池统一分配管理和优化</p>
+<h2 id="java网络">Java网络</h2>
+<h3 id="osi七层模型"><strong>osi七层模型</strong></h3>
+<p>物理层</p>
+<p>数据链路层</p>
+<p>网络层</p>
+<p>传输层</p>
+<p>会话层</p>
+<p>表示层</p>
+<p>应用层</p>
+<h3 id="输入url显示主页的过程"><strong>输入url显示主页的过程</strong></h3>
+<p>DNS解析</p>
+<p>TCP连接</p>
+<p>发送HTTP请求</p>
+<p>服务器处理请求返回一个HTML</p>
+<p>浏览器渲染页面</p>
+<p>链接结束</p>
+<h3 id="tcp三次握手"><strong>TCP三次握手</strong></h3>
+<p>客户端发送带有SYN的数据包</p>
+<p>服务端发送带有SYN/ACK的数据包</p>
+<p>客户端发送带有ACK的数据包</p>
+<p>建立可靠的通信信道  确认接受和发送都正常</p>
+<p>SNY确认发送发到接受方的通信美问题 ACK确认接收方到发送方的通道美问题</p>
+<h3 id="断开连接需四次挥手"><strong>断开连接需四次挥手</strong></h3>
+<p>客户端发送一个FIN 关闭数据传送</p>
+<p>服务端收到FIN发送一个ACK</p>
+<p>服务端关闭连接 发送一个FIN给客户端</p>
+<p>客户端发送一个ACK确认关闭</p>
+<h2 id="服务器相关">服务器相关</h2>
+<h3 id="tomcat和nginx">Tomcat和Nginx</h3>
+<p>Nginx在均衡负载里属于前端服务器，用来处理请求的转发（反向代理）；属于静态页面服务器，大部分时间不会运行项目。</p>
+<p>Tomcat是后端服务器，属于Java servlet容器，用来生成动态页面，直接运行项目。（发送一个请求，先经过Nginx，它会合理地将请求分配到后台比较不忙的Tomcat，Tomcat 处理好请求会将数据返回给Nginx，然后Nginx将数据返回给浏览器进行显示，如果是一些静态数据，Nginx会直接处理）</p>
+<p>Tomcat/Jetty 等都是Web 容器，负责管理整个Servlet的生命周期。类似Spring 的IOC会管理整个Bean的生命周期。 而GlassFish/Weblogic这一类的 application Server，则会管理更多，包含命名服务器，EJB等资源。</p>
+<p>Nginx/apache 可以说是web server ，它们可以处理静态资源，无法处理servlet，一般把Nginx放在前端处理静态资源，如果有对应的Servlet请求，则通过AJP转给后端服务器处理</p>
+<p>“tomcat用在java后台程序上，java后台程序难道不能用apache和nginx吗？”不能。apache和nginx不是servlet容器。什么是servlet容器呢？即实现HttpServletRequest、HttpServletResponse、HttpSession等等接口，解析http请求，通过类加载器加载对应的servlet实现类并调用。也就是说servlet容器必须由java或者基于jvm的语言实现。</p>
 <h2 id="spring">spring</h2>
 <h3 id="springbootapplication"><strong>@SpringBootApplication</strong></h3>
 <p>@SpringBootConfiguration:等同于spring 的xml配置文件</p>
@@ -234,20 +264,6 @@
 <p>JoinPoint(链接点)：可以使用aop的地方（方法的前后）</p>
 <h2 id="io流"><strong>IO流</strong></h2>
 <p>![IO-操作方式分类](C:\Users\22215\Pictures\Saved Pictures\IO-操作方式分类.png)</p>
-<h1 id="linux">Linux</h1>
-<h2 id="简单的脚本书写">简单的脚本书写</h2>
-<pre><code class="language-vi">vi start.sh
-
-编写脚本 保存退出
-
-chmod +x start.sh   赋权使其可执行
-
-./start.sh 执行脚本
-</code></pre>
-<h2 id="文件-赋权">文件  赋权</h2>
-<pre><code class="language-chown">chown user:market f01　　//把文件f01的主改为uesr，添加到market组
-chown -R liu /usr/meng  //将目录/usr/meng及其下面的所有文件、子目录的文件主改成 liu：
-</code></pre>
 <hr>
 <h1 id="杂的">杂的</h1>
 <h3 id="和的区别"><strong>&amp;和&amp;&amp;的区别</strong></h3>
@@ -368,12 +384,18 @@ String bb = &quot;boo&quot;;    //在常量池中查找
 <p>http://nginx.org/</p>
 <h2 id="2-开始进行-nginx-安装">2、开始进行 nginx 安装</h2>
 <h3 id="1安装-pcre-依赖"><strong>（1）安装 pcre 依赖</strong></h3>
-<h4 id="第一步-联网下载-pcre-压缩文件依赖">第一步 联网下载 pcre 压缩文件依赖</h4>
+<ol>
+<li>联网下载 pcre 压缩文件依赖</li>
+</ol>
 <pre><code>wget http://downloads.sourceforge.net/project/pcre/pcre/8.37/pcre-8.37.tar.gz
 </code></pre>
-<h4 id="第二步-解压压缩文件">第二步 解压压缩文件</h4>
+<ol start="2">
+<li>解压压缩文件</li>
+</ol>
 <p>使用命令 tar –xvf pcre-8.37.tar.gz</p>
-<h4 id="第三步configure-完成后回到-pcre-目录下执行-make最后执行-make-install">第三步./configure 完成后，回到 pcre 目录下执行 make，最后执行 make install</h4>
+<ol start="3">
+<li>./configure 完成后，回到 pcre 目录下执行 make，最后执行 make install</li>
+</ol>
 <p>查看pcre依赖是否安装成功：pcre-config --version</p>
 <h3 id="2安装-openssl-zlib-gcc-依赖"><strong>（2）安装 openssl 、zlib 、 gcc 依赖</strong></h3>
 <pre><code>yum -y install make zlib zlib-devel gcc-c++ libtool openssl openssl-devel
@@ -393,34 +415,42 @@ systemctl stop firewalld &amp;&amp; systemctl disable firewalld
 
 yum -y install iptables-services &amp;&amp; systemctl start iptables &amp;&amp; systemctl enable iptables&amp;&amp; iptables -F &amp;&amp; service iptables save
 </code></pre>
-<p>①　查看开放的端口</p>
+<p>查看开放的端口</p>
 <p>firewall-cmd --list-all</p>
 <figure data-type="image" tabindex="1"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029102553820-1653097356.png" alt="img" loading="lazy"></figure>
-<p>②　设置开放的端口号</p>
+<p>设置开放的端口号</p>
 <p>firewall-cmd --add-service=http –permanent</p>
 <p>firewall-cmd --add-port=80/tcp --permanent</p>
-<p>③　设置之后需要重启防火墙</p>
+<p>设置之后需要重启防火墙</p>
 <p>firewall-cmd --reload</p>
 <figure data-type="image" tabindex="2"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029102610520-1568314025.png" alt="img" loading="lazy"></figure>
-<p>④　访问成功</p>
+<p>访问成功</p>
 <figure data-type="image" tabindex="3"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029102622854-1627774877.png" alt="img" loading="lazy"></figure>
 <h1 id="二-nginx常用命令"><strong>二、Nginx常用命令</strong></h1>
 <p>进入 nginx 目录中: cd /usr/local/nginx/sbin</p>
-<h2 id="1-查看-nginx-版本号"><strong>1、查看 nginx 版本号</strong></h2>
+<ol>
+<li>查看 nginx 版本号</li>
+</ol>
 <p>./nginx -v</p>
-<h2 id="2-启动-nginx"><strong>2、启动 nginx</strong></h2>
+<ol start="2">
+<li>启动 nginx</li>
+</ol>
 <p>./nginx</p>
 <p>查看是否启动成功：ps -ef|grep nginx</p>
 <figure data-type="image" tabindex="4"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029102726015-172811692.png" alt="img" loading="lazy"></figure>
-<h2 id="3-停止-nginx"><strong>3、停止 nginx</strong></h2>
+<ol start="3">
+<li>停止 nginx</li>
+</ol>
 <p>./nginx -s stop</p>
-<h2 id="4-重新加载-nginx"><strong>4、重新加载 nginx</strong></h2>
+<ol start="4">
+<li>重新加载 nginx</li>
+</ol>
 <p>./nginx -s reload</p>
 <h1 id="三-nginxconf配置文件"><strong>三、nginx.conf配置文件</strong></h1>
-<h2 id="1-位置"><strong>1、位置</strong></h2>
+<h2 id="位置"><strong>位置</strong></h2>
 <p>vim /usr/local/nginx/conf/nginx.conf</p>
-<h2 id="2-配置文件中的内容包含三部分"><strong>2、配置文件中的内容（包含三部分）</strong></h2>
-<h3 id="1全局块配置服务器整体运行的配置指令">（1）全局块：配置服务器整体运行的配置指令</h3>
+<h2 id="配置文件中的内容包含三部分">配置文件中的内容（包含三部分)</h2>
+<h3 id="全局块配置服务器整体运行的配置指令">全局块：配置服务器整体运行的配置指令</h3>
 <p>从配置文件开始到 events 块之间的内容，主要会设置一些影响 nginx 服务器整体运行的配置指令，主要包括配</p>
 <p>置运行 Nginx 服务器的用户（组）、允许生成的 worker process 数，进程 PID 存放路径、日志存放路径和类型以</p>
 <p>及配置文件的引入等。</p>
@@ -428,97 +458,102 @@ yum -y install iptables-services &amp;&amp; systemctl start iptables &amp;&amp; 
 <p>这是 Nginx 服务器并发处理服务的关键配置，worker_processes 值越大，可以支持的并发处理量也越多，但是</p>
 <p>会受到硬件、软件等设备的制约</p>
 <figure data-type="image" tabindex="5"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029102802614-510328292.png" alt="img" loading="lazy"></figure>
-<h3 id="2events-块影响-nginx-服务器与用户的网络连接">（2）events 块：影响 Nginx 服务器与用户的网络连接</h3>
+<h3 id="events-块影响-nginx-服务器与用户的网络连接">events 块：影响 Nginx 服务器与用户的网络连接</h3>
 <p>events 块涉及的指令主要影响 Nginx 服务器与用户的网络连接，常用的设置包括是否开启对多 work process</p>
 <p>下的网络连接进行序列化，是否允许同时接收多个网络连接，选取哪种事件驱动模型来处理连接请求，每个 word</p>
 <p>process 可以同时支持的最大连接数等。</p>
 <p>上述例子就表示每个 work process 支持的最大连接数为 1024.</p>
 <p>这部分的配置对 Nginx 的性能影响较大，在实际中应该灵活配置。</p>
 <figure data-type="image" tabindex="6"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029102827884-232471630.png" alt="img" loading="lazy"></figure>
-<h3 id="3http-块">（3）http 块</h3>
+<h3 id="http-块">http 块</h3>
 <p>这算是 Nginx 服务器配置中最频繁的部分，代理、缓存和日志定义等绝大多数功能和第三方模块的配置都在这里。</p>
 <p>需要注意的是：http 块也可以包括 http 全局块、server 块。</p>
 <figure data-type="image" tabindex="7"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029102837788-914776640.png" alt="img" loading="lazy"></figure>
-<h4 id="1-http-全局块">①、http 全局块</h4>
+<h4 id="1-http-全局块">1. http 全局块</h4>
 <p>http 全局块配置的指令包括文件引入、MIME-TYPE 定义、日志自定义、连接超时时间、单链接请求数上限等。</p>
 <figure data-type="image" tabindex="8"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029102851922-1592334025.png" alt="img" loading="lazy"></figure>
-<h4 id="2-server-块">②、server 块</h4>
+<h4 id="2-server-块">2. server 块</h4>
 <p>这块和虚拟主机有密切关系，虚拟主机从用户角度看，和一台独立的硬件主机是完全一样的，该技术的产生是为了</p>
 <p>节省互联网服务器硬件成本。</p>
 <p>每个 http 块可以包括多个 server 块，而每个 server 块就相当于一个虚拟主机。</p>
 <p>而每个 server 块也分为全局 server 块，以及可以同时包含多个 locaton 块。</p>
 <figure data-type="image" tabindex="9"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029102901346-2016909563.png" alt="img" loading="lazy"></figure>
-<h5 id="全局-server-块">全局 server 块</h5>
+<h5 id="1全局-server-块">1.全局 server 块</h5>
 <p>最常见的配置是本虚拟机主机的监听配置和本虚拟主机的名称或 IP 配置。</p>
-<h5 id="location-块">location 块</h5>
+<h5 id="2-location-块">2. location 块</h5>
 <p>一个 server 块可以配置多个 location 块。</p>
 <p>这块的主要作用是基于 Nginx 服务器接收到的请求字符串（例如 server_name/uri-string），对虚拟主机名称</p>
 <p>（也可以是 IP 别名）之外的字符串（例如 前面的 /uri-string）进行匹配，对特定的请求进行处理。地址定向、数据缓</p>
 <p>存和应答控制等功能，还有许多第三方模块的配置也在这里进行。</p>
-<h1 id="四-nginx-反向代理实例-2"><strong>四、Nginx 反向代理实例 2</strong></h1>
-<h2 id="1-实现效果"><strong>1、实现效果</strong></h2>
+<h1 id="四-nginx-反向代理实例">四、Nginx 反向代理实例</h1>
+<h2 id="实现效果"><strong>实现效果</strong></h2>
 <p>打开浏览器，在浏览器地址栏输入地址 www.123.com，跳转到 liunx 系统 tomcat 主页</p>
 <p>面中</p>
-<h2 id="2-准备工作"><strong>2、准备工作</strong></h2>
-<h3 id="1在-liunx-系统安装-tomcat使用默认端口-8080"><strong>（1）在 liunx 系统安装 tomcat，使用默认端口 8080</strong></h3>
-<p>* tomcat 安装文件放到 liunx 系统中，解压</p>
-<p>* 进入 tomcat 的 bin 目录中，./startup.sh 启动 tomcat 服务器</p>
-<h3 id="2对外开放访问的端口"><strong>（2）对外开放访问的端口</strong></h3>
+<h2 id="准备工作"><strong>准备工作</strong></h2>
+<p><strong>在 liunx 系统安装 tomcat，使用默认端口 8080</strong></p>
+<ul>
+<li>
+<p>tomcat 安装文件放到 liunx 系统中，解压</p>
+</li>
+<li>
+<p>进入 tomcat 的 bin 目录中，./startup.sh 启动 tomcat 服务器</p>
+</li>
+</ul>
+<p><strong>对外开放访问的端口</strong></p>
 <p>firewall-cmd --add-port=8080/tcp --permanent</p>
 <p>firewall-cmd –reload</p>
-<p>查看已经开放的端口号</p>
+<p><strong>查看已经开放的端口号</strong></p>
 <p>firewall-cmd --list-all</p>
-<h3 id="3在-windows-系统中通过浏览器访问-tomcat-服务器"><strong>（3）在 windows 系统中通过浏览器访问 tomcat 服务器</strong></h3>
-<h2 id="3-访问过程的分析"><strong>3、访问过程的分析</strong></h2>
+<h2 id="访问过程的分析"><strong>访问过程的分析</strong></h2>
 <figure data-type="image" tabindex="10"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103129000-1647870419.png" alt="img" loading="lazy"></figure>
-<h2 id="4-具体配置"><strong>4、具体配置</strong></h2>
+<h2 id="具体配置"><strong>具体配置</strong></h2>
 <p>第一步 在 windows 系统的 host 文件进行域名和 ip 对应关系的配置</p>
 <figure data-type="image" tabindex="11"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103141392-957260709.png" alt="img" loading="lazy"></figure>
 <p>添加内容在 host 文件中</p>
 <figure data-type="image" tabindex="12"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103147529-141884990.png" alt="img" loading="lazy"></figure>
 <p>第二步 在 nginx 进行请求转发的配置（反向代理配置）</p>
 <figure data-type="image" tabindex="13"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103200326-1880157403.png" alt="img" loading="lazy"></figure>
-<h2 id="5-最终测试"><strong>5、最终测试</strong></h2>
+<h2 id="最终测试"><strong>最终测试</strong></h2>
 <figure data-type="image" tabindex="14"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103210478-1402408403.png" alt="img" loading="lazy"></figure>
 <h1 id="五-nginx-反向代理实例">**五、Nginx 反向代理实例 **</h1>
-<h2 id="1-实现效果-2"><strong>1、实现效果</strong></h2>
+<h2 id="实现效果-2"><strong>实现效果</strong></h2>
 <p>使用 nginx 反向代理，根据访问的路径跳转到不同端口的服务中</p>
 <p>nginx 监听端口为 9001，</p>
 <p>访问 http://192.168.17.129:9001/edu/ 直接跳转到 127.0.0.1:8080</p>
 <p>访问 http:// 192.168.17.129:9001/vod/ 直接跳转到 127.0.0.1:8081</p>
-<h2 id="2-准备工作-2"><strong>2、准备工作</strong></h2>
+<h2 id="准备工作-2"><strong>准备工作</strong></h2>
 <p>（1）准备两个 tomcat 服务器，一个 8080 端口，一个 8081 端口</p>
 <p>（2）创建文件夹和测试页面</p>
-<h2 id="3-具体配置"><strong>3、具体配置</strong></h2>
+<h2 id="具体配置-2">具体配置</h2>
 <p>（1）找到 nginx 配置文件，进行反向代理配置</p>
 <figure data-type="image" tabindex="15"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103236151-575997990.png" alt="img" loading="lazy"></figure>
 <p>（2）开放对外访问的端口号 9001 8080 8081</p>
-<h2 id="4-最终测试"><strong>4、最终测试</strong></h2>
+<h2 id="最终测试-2"><strong>最终测试</strong></h2>
 <figure data-type="image" tabindex="16"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103245851-2135151223.png" alt="img" loading="lazy"></figure>
 <h1 id="六-nginx-配置实例-负载均衡"><strong>六、Nginx 配置实例-负载均衡</strong></h1>
-<h2 id="1-实现效果-3"><strong>1、实现效果</strong></h2>
+<h2 id="实现效果-3"><strong>实现效果</strong></h2>
 <p>（1）浏览器地址栏输入地址 http://192.168.17.129/edu/a.html，负载均衡效果，平均 8080</p>
 <p>和 8081 端口中</p>
-<h2 id="2-准备工作-3"><strong>2、准备工作</strong></h2>
+<h2 id="准备工作-3"><strong>准备工作</strong></h2>
 <p>（1）准备两台 tomcat 服务器，一台 8080，一台 8081</p>
 <p>（2）在两台 tomcat 里面 webapps 目录中，创建名称是 edu 文件夹，在 edu 文件夹中创建</p>
 <p>页面 a.html，用于测试</p>
-<h2 id="3-在-nginx-的配置文件中进行负载均衡的配置"><strong>3、在 nginx 的配置文件中进行负载均衡的配置</strong></h2>
+<h2 id="在-nginx-的配置文件中进行负载均衡的配置"><strong>在 nginx 的配置文件中进行负载均衡的配置</strong></h2>
 <figure data-type="image" tabindex="17"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103257021-406101154.png" alt="img" loading="lazy"></figure>
-<h2 id="4-nginx-分配服务器策略"><strong>4、nginx 分配服务器策略</strong></h2>
-<h3 id="第一种-轮询默认"><strong>第一种 轮询（默认）</strong></h3>
+<h2 id="nginx-分配服务器四种策略"><strong>nginx 分配服务器四种策略</strong></h2>
+<h3 id="1-轮询默认"><strong>1. 轮询（默认）</strong></h3>
 <p>每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器 down 掉，能自动剔除。</p>
-<h3 id="第二种-weight"><strong>第二种 weight</strong></h3>
+<h3 id="2-weight"><strong>2. weight</strong></h3>
 <p>weight 代表权重默认为 1,权重越高被分配的客户端越多</p>
 <figure data-type="image" tabindex="18"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103434709-133983538.png" alt="img" loading="lazy"></figure>
-<h3 id="第三种-ip_hash"><strong>第三种 ip_hash</strong></h3>
+<h3 id="3-ip_hash"><strong>3. ip_hash</strong></h3>
 <p>每个请求按访问 ip 的 hash 结果分配，这样每个访客固定访问一个后端服务器</p>
 <figure data-type="image" tabindex="19"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103440910-1253898902.png" alt="img" loading="lazy"></figure>
-<h3 id="第四种-fair第三方"><strong>第四种 fair（第三方）</strong></h3>
+<h3 id="4-fair第三方"><strong>4. fair（第三方）</strong></h3>
 <p>按后端服务器的响应时间来分配请求，响应时间短的优先分配。</p>
 <figure data-type="image" tabindex="20"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103448391-1932086344.png" alt="img" loading="lazy"></figure>
 <h1 id="七-nginx-配置实例-动静分离"><strong>七、Nginx 配置实例-动静分离</strong></h1>
-<h2 id="1-什么是动静分离"><strong>1、什么是动静分离</strong></h2>
+<h2 id="什么是动静分离"><strong>什么是动静分离</strong></h2>
 <figure data-type="image" tabindex="21"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103503613-506507153.png" alt="img" loading="lazy"></figure>
 <p>Nginx 动静分离简单来说就是把动态跟静态请求分开，不能理解成只是单纯的把动态页面和</p>
 <p>静态页面物理分离。严格意义上说应该是动态请求跟静态请求分开，可以理解成使用 Nginx</p>
@@ -532,13 +567,13 @@ yum -y install iptables-services &amp;&amp; systemctl start iptables &amp;&amp; 
 <p>不建议使用 Expires 来缓存），我这里设置 3d，表示在这 3 天之内访问这个 URL，发送一</p>
 <p>个请求，比对服务器该文件最后更新时间没有变化，则不会从服务器抓取，返回状态码 304，</p>
 <p>如果有修改，则直接从服务器重新下载，返回状态码 200。</p>
-<h2 id="2-准备工作-4"><strong>2、准备工作</strong></h2>
+<h2 id="准备工作-4"><strong>准备工作</strong></h2>
 <p>在 liunx 系统中准备静态资源，用于进行访问</p>
 <figure data-type="image" tabindex="22"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103551408-155195568.png" alt="img" loading="lazy"></figure>
-<h2 id="3-具体配置-2"><strong>3、具体配置</strong></h2>
+<h2 id="具体配置-3"><strong>具体配置</strong></h2>
 <p>在 nginx 配置文件中进行配置</p>
 <figure data-type="image" tabindex="23"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103601180-712857275.png" alt="img" loading="lazy"></figure>
-<h2 id="4-最终测试-2"><strong>4、最终测试</strong></h2>
+<h2 id="最终测试-3"><strong>最终测试</strong></h2>
 <p>（1）浏览器中输入地址</p>
 <p>http://192.168.17.129/image/01.jpg</p>
 <figure data-type="image" tabindex="24"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103613911-2017185401.png" alt="img" loading="lazy"></figure>
@@ -549,25 +584,35 @@ yum -y install iptables-services &amp;&amp; systemctl start iptables &amp;&amp; 
 <p>服务器上的某个静态文件，查看是否能访问，如果可以访问说明静态资源 nginx 直接返回</p>
 <p>了，不走后端 tomcat 服务器</p>
 <h1 id="八-nginx原理"><strong>八、nginx原理</strong></h1>
-<h2 id="1-mater-和-worker">1、mater 和 worker</h2>
+<h2 id="mater-和-worker">mater 和 worker</h2>
 <figure data-type="image" tabindex="26"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103710873-640599395.png" alt="img" loading="lazy"></figure>
 <figure data-type="image" tabindex="27"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103717881-58535625.png" alt="img" loading="lazy"></figure>
-<h2 id="2-worker-如何进行工作的">2、worker 如何进行工作的</h2>
+<h2 id="worker-如何进行工作的">worker 如何进行工作的</h2>
 <figure data-type="image" tabindex="28"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103730680-1429030716.png" alt="img" loading="lazy"></figure>
-<h2 id="3-一个-master-和多个-woker-有好处">3、一个 master 和多个 woker 有好处</h2>
+<h2 id="一个-master-和多个-woker-有好处">一个 master 和多个 woker 有好处</h2>
 <p>（1）可以使用 nginx –s reload 热部署，利用 nginx 进行热部署操作</p>
 <p>（2）每个 woker 是独立的进程，如果有其中的一个 woker 出现问题，其他 woker 独立的，</p>
 <p>继续进行争抢，实现请求过程，不会造成服务中断</p>
-<h2 id="4-设置多少个-woker-合适">4、设置多少个 woker 合适</h2>
+<h2 id="设置多少个-woker-合适">设置多少个 woker 合适</h2>
 <p>worker 数和服务器的 cpu 数相等是最为适宜的</p>
-<h2 id="5-连接数-worker_connection">5、连接数 worker_connection</h2>
-<p>第一个：发送请求，占用了 woker 的几个连接数？</p>
+<h2 id="连接数-worker_connection">连接数 worker_connection</h2>
+<ol>
+<li>：发送请求，占用了 woker 的几个连接数？</li>
+</ol>
 <p>答案：2 或者 4 个</p>
 <figure data-type="image" tabindex="29"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103745507-149451607.png" alt="img" loading="lazy"></figure>
-<p>第二个：nginx 有一个 master，有四个 woker，每个 woker 支持最大的连接数 1024，支持的</p>
+<ol start="2">
+<li>：nginx 有一个 master，有四个 woker，每个 woker 支持最大的连接数 1024，支持的</li>
+</ol>
 <p>最大并发数是多少？</p>
-<p>l 普通的静态访问最大并发数是： worker_connections * worker_processes /2，</p>
-<p>l 而如果是 HTTP 作 为反向代理来说，最大并发数量应该是 worker_connections *</p>
+<ul>
+<li>
+<p>普通的静态访问最大并发数是： worker_connections * worker_processes /2，</p>
+</li>
+<li>
+<p>而如果是 HTTP 作 为反向代理来说，最大并发数量应该是 worker_connections *</p>
+</li>
+</ul>
 <p>worker_processes/4。</p>
 ]]></content>
     </entry>
