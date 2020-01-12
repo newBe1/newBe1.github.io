@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://newbe1.github.io/</id>
-    <title></title>
-    <updated>2020-01-12T08:17:20.273Z</updated>
+    <title>YAN · RUI</title>
+    <updated>2020-01-12T09:55:10.380Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://newbe1.github.io/"/>
     <link rel="self" href="https://newbe1.github.io/atom.xml"/>
+    <subtitle>静坐长思己过，闲谈莫论人非</subtitle>
     <logo>https://newbe1.github.io/images/avatar.png</logo>
     <icon>https://newbe1.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, </rights>
+    <rights>All rights reserved 2020, YAN · RUI</rights>
+    <entry>
+        <title type="html"><![CDATA[妈妈]]></title>
+        <id>https://newbe1.github.io/post/ma-ma</id>
+        <link href="https://newbe1.github.io/post/ma-ma">
+        </link>
+        <updated>2020-01-12T09:48:41.000Z</updated>
+        <content type="html"><![CDATA[<p>“从小觉得最厉害的人就是妈妈，不怕黑，什么都知道，做好吃的饭，把生活打理得井井有条，哭着不知道怎么办时只好找她。可我好像忘了这个被我依靠的人也曾是个小姑娘，怕黑也掉眼泪，笨手笨脚会被针扎到手。最美的姑娘，是什么让你变得这么强大呢，是岁月，还是爱。”——德卡先生的信箱</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[霸王别姬]]></title>
+        <id>https://newbe1.github.io/post/hdfgh</id>
+        <link href="https://newbe1.github.io/post/hdfgh">
+        </link>
+        <updated>2020-01-12T09:28:56.000Z</updated>
+        <content type="html"><![CDATA[<p>他是假霸王,你是真虞姬</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[我的博客]]></title>
         <id>https://newbe1.github.io/post/wo-de-bo-ke</id>
