@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://newbe1.github.io/</id>
     <title>YAN · RUI</title>
-    <updated>2020-01-12T10:08:00.404Z</updated>
+    <updated>2020-01-12T10:13:43.530Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://newbe1.github.io/"/>
     <link rel="self" href="https://newbe1.github.io/atom.xml"/>
@@ -480,7 +480,7 @@ yum -y install iptables-services &amp;&amp; systemctl start iptables &amp;&amp; 
 <figure data-type="image" tabindex="13"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103200326-1880157403.png" alt="img" loading="lazy"></figure>
 <h2 id="5-最终测试"><strong>5、最终测试</strong></h2>
 <figure data-type="image" tabindex="14"><img src="https://img2018.cnblogs.com/blog/1455597/201910/1455597-20191029103210478-1402408403.png" alt="img" loading="lazy"></figure>
-<h1 id="五-nginx-反向代理实例-2"><strong>五、Nginx 反向代理实例 2</strong></h1>
+<h1 id="五-nginx-反向代理实例">**五、Nginx 反向代理实例 **</h1>
 <h2 id="1-实现效果-2"><strong>1、实现效果</strong></h2>
 <p>使用 nginx 反向代理，根据访问的路径跳转到不同端口的服务中</p>
 <p>nginx 监听端口为 9001，</p>
