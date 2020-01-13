@@ -154,7 +154,7 @@
                     <article class="post-wrap">
                         <header class="post-header">
                             <h1 class="post-title">
-                                linux
+                                Spring
                             </h1>
                             <!--en-->
                             <div class="post-meta en">
@@ -163,15 +163,15 @@
                                     YAN · RUI
                                 </a>
                                 <span class="post-time">
-                                Date: <a href="#">2020-01-12</a>
+                                Date: <a href="#">2020-01-13</a>
                             </span>
-                                <span class="post-readtime">Reading Time:<a href="#">1.6 mins</a></span>
-                                <span class="post-words">words:<a href="#">358</a></span>
+                                <span class="post-readtime">Reading Time:<a href="#">0.6 mins</a></span>
+                                <span class="post-words">words:<a href="#">143</a></span>
                                 
                                     <span class="post-category">
                                 Category:
                                 
-                                <a href="https://newbe1.github.io/tag/DBcA9HmSr">服务器</a>
+                                <a href="https://newbe1.github.io/tag/xL_3ynRyw">Java</a>
                                 
                             </span>
                                     
@@ -182,69 +182,44 @@
                                 <a itemprop="author" rel="author" href="/">
                                     YAN · RUI
                                 </a>
-                                <span class="post-time">&#x65E5;&#x671F;: <a href="#">2020-01-12</a></span>
-                                <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a href="#">1.6 &#x5206;&#x949F;</a></span>
-                                <span class="post-words">&#x5B57;&#x6570;:<a href="#">358</a></span>
+                                <span class="post-time">&#x65E5;&#x671F;: <a href="#">2020-01-13</a></span>
+                                <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a href="#">0.6 &#x5206;&#x949F;</a></span>
+                                <span class="post-words">&#x5B57;&#x6570;:<a href="#">143</a></span>
                                 
                                     <span class="post-category">&#x5206;&#x7C7B;:
                                 
-                                <a href="https://newbe1.github.io/tag/DBcA9HmSr">服务器</a>
+                                <a href="https://newbe1.github.io/tag/xL_3ynRyw">Java</a>
                                 
                             </span>
                                     
                             </div>
                         </header>
                         <div class="post-content">
-                            <h1 id="linux">Linux</h1>
-<h2 id="简单的脚本书写">简单的脚本书写</h2>
-<pre><code class="language-vi">vi start.sh
-
-编写脚本 保存退出
-
-chmod +x start.sh   赋权使其可执行
-
-./start.sh 执行脚本
-</code></pre>
-<h2 id="文件-权限">文件  权限</h2>
-<pre><code class="language-chown">chown user:market f01　　//把文件f01的主改为uesr，添加到market组
-chown -R liu /usr/meng  //将目录/usr/meng及其下面的所有文件、子目录的文件主改成 liu：
-</code></pre>
-<h2 id="防火墙基本操作">防火墙基本操作</h2>
-<p><strong>1.firewalld的基本使用</strong></p>
-<p>启动：  systemctl start firewalld</p>
-<p>查状态：systemctl status firewalld</p>
-<p>停止：  systemctl disable firewalld</p>
-<p>禁用：  systemctl stop firewalld</p>
-<p>在开机时启用一个服务：systemctl enable firewalld.service</p>
-<p>在开机时禁用一个服务：systemctl disable firewalld.service</p>
-<p>查看服务是否开机启动：systemctl is-enabled firewalld.service</p>
-<p>查看已启动的服务列表：systemctl list-unit-files|grep enabled</p>
-<p>查看启动失败的服务列表：systemctl --failed</p>
-<p><strong>2.配置firewalld-cmd</strong></p>
-<p>查看版本： firewall-cmd --version</p>
-<p>查看帮助： firewall-cmd --help</p>
-<p>显示状态： firewall-cmd --state</p>
-<p>查看所有打开的端口： firewall-cmd --zone=public --list-ports</p>
-<p>更新防火墙规则： firewall-cmd --reload</p>
-<p>查看区域信息:  firewall-cmd --get-active-zones</p>
-<p>查看指定接口所属区域： firewall-cmd --get-zone-of-interface=eth0</p>
-<p>拒绝所有包：firewall-cmd --panic-on</p>
-<p>取消拒绝状态： firewall-cmd --panic-off</p>
-<p>查看是否拒绝： firewall-cmd --query-panic</p>
-<p><strong>3.添加端口</strong></p>
-<p>添加端口80	firewall-cmd --add-port=80/tcp --permanent</p>
-<p>查端口80是否开启	firewall-cmd --query-port=80/tcp</p>
-<p>关闭80端口	 firewall-cmd --remove-port=80/tcp --permanent</p>
-<p>重新载入更新防火墙规则	firewall-cmd --reload</p>
+                            <h2 id="spring">spring</h2>
+<h3 id="springbootapplication"><strong>@SpringBootApplication</strong></h3>
+<p>@SpringBootConfiguration:等同于spring 的xml配置文件</p>
+<p>@EnadleAutoConfiguration: 自动配置</p>
+<p>@ComponentScan:组件扫描 自动发现和配置一些Bean</p>
+<h3 id="restcontroller"><strong>@RestController</strong></h3>
+<p>@Controller和@ResponseBody的合集 表示这个是控制器bean 是REST风格的控制器</p>
+<h3 id="spring-aop"><strong>spring AOP</strong></h3>
+<p>aop的动态代理是Cglib代理（aop的原理也是动态代理  从spring boot 2.0后 默认Cglib代理  之前是有JDK代理的）</p>
+<p>PointCut(切点)：真正使用aop的方法</p>
+<p>Advice(通知)：定义aop何时被调用 以及执行的方法</p>
+<p>JoinPoint(链接点)：可以使用aop的地方（方法的前后）</p>
 
                         </div>
                         <div class="post-toc">
                             <ul class="markdownIt-TOC">
-<li><a href="#linux">Linux</a>
+<li>
 <ul>
-<li><a href="#%E7%AE%80%E5%8D%95%E7%9A%84%E8%84%9A%E6%9C%AC%E4%B9%A6%E5%86%99">简单的脚本书写</a></li>
-<li><a href="#%E6%96%87%E4%BB%B6-%E6%9D%83%E9%99%90">文件  权限</a></li>
-<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">防火墙基本操作</a></li>
+<li><a href="#spring">spring</a>
+<ul>
+<li><a href="#springbootapplication"><strong>@SpringBootApplication</strong></a></li>
+<li><a href="#restcontroller"><strong>@RestController</strong></a></li>
+<li><a href="#spring-aop"><strong>spring AOP</strong></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -259,7 +234,7 @@ chown -R liu /usr/meng  //将目录/usr/meng及其下面的所有文件、子目
 
                             <p class="copyright-item">
                                 <span>Permalink:</span>
-                                <span><a href="https://newbe1.github.io/post/linux">https://newbe1.github.io/post/linux</a></span>
+                                <span><a href="https://newbe1.github.io/post/spring">https://newbe1.github.io/post/spring</a></span>
                             </p>
 
                             <p class="copyright-item">
@@ -276,7 +251,7 @@ chown -R liu /usr/meng  //将目录/usr/meng及其下面的所有文件、子目
 
                             <p class="copyright-item">
                                 <span>&#x6C38;&#x4E45;&#x94FE;&#x63A5;:</span>
-                                <span><a href="https://newbe1.github.io/post/linux">https://newbe1.github.io/post/linux</a></span>
+                                <span><a href="https://newbe1.github.io/post/spring">https://newbe1.github.io/post/spring</a></span>
                             </p>
 
                             <p class="copyright-item">
@@ -291,7 +266,7 @@ chown -R liu /usr/meng  //将目录/usr/meng及其下面的所有文件、子目
                                 <span class="tag">
                                 
                                 
-                                <a href="https://newbe1.github.io/tag/DBcA9HmSr"># 服务器</a>
+                                <a href="https://newbe1.github.io/tag/xL_3ynRyw"># Java</a>
                                 
                                 
                             </span>
@@ -309,7 +284,7 @@ chown -R liu /usr/meng  //将目录/usr/meng及其下面的所有文件、子目
                                 <span class="tag">
                                 
                                 
-                                <a href="https://newbe1.github.io/tag/DBcA9HmSr"># 服务器</a>
+                                <a href="https://newbe1.github.io/tag/xL_3ynRyw"># Java</a>
                                 
                                 
                             </span>
@@ -323,13 +298,13 @@ chown -R liu /usr/meng  //将目录/usr/meng及其下面的所有文件、子目
                         </section>
                         <section class="post-nav">
                             
-                                <a class="prev" rel="prev" href="https://newbe1.github.io/post/shu-ju-ku">
-                                    数据库
+                                <a class="prev" rel="prev" href="https://newbe1.github.io/post/ji-he">
+                                    集合
                                 </a>
                                 
                                     
-                                        <a class="next" rel="next" href="https://newbe1.github.io/post/ma-ma">
-                                            摘抄
+                                        <a class="next" rel="next" href="https://newbe1.github.io/post/shu-ju-ku">
+                                            数据库
                                         </a>
                                         
                         </section>

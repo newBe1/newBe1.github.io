@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://newbe1.github.io/</id>
     <title>YAN · RUI</title>
-    <updated>2020-01-12T10:57:49.517Z</updated>
+    <updated>2020-01-13T06:08:09.011Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://newbe1.github.io/"/>
     <link rel="self" href="https://newbe1.github.io/atom.xml"/>
@@ -10,6 +10,44 @@
     <logo>https://newbe1.github.io/images/avatar.png</logo>
     <icon>https://newbe1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, YAN · RUI</rights>
+    <entry>
+        <title type="html"><![CDATA[集合]]></title>
+        <id>https://newbe1.github.io/post/ji-he</id>
+        <link href="https://newbe1.github.io/post/ji-he">
+        </link>
+        <updated>2020-01-13T06:05:52.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="集合">集合</h1>
+<p>ArrayList和LinkedList 不是同步的  线程不安全</p>
+<p>ArrayList底层使用数组 LinkedList底层是双向链表</p>
+<p>ArrayList的增删受时间复杂度影响 LinkedList则不受（不支持高效的随机元素访问）</p>
+<h2 id="hashtable">HashTable</h2>
+<p>HashTable底层是数组和链表结合在一起实现的，key和value都不能为null（空指针异常），线程安全（修改数据时锁住整个HashTable）效率低，ConcurrentHashMap做了相关优化</p>
+<h2 id="hashmap">HashMap</h2>
+<p>底层是数组和链表实现的，key和value都可以为null，线程不安全</p>
+<h2 id="concurrenthashmap">ConcurrentHashMap</h2>
+<p>底层采用数组和链表实现，线程安全，key和value不能为null（空指针异常）</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Spring]]></title>
+        <id>https://newbe1.github.io/post/spring</id>
+        <link href="https://newbe1.github.io/post/spring">
+        </link>
+        <updated>2020-01-13T06:05:21.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="spring">spring</h2>
+<h3 id="springbootapplication"><strong>@SpringBootApplication</strong></h3>
+<p>@SpringBootConfiguration:等同于spring 的xml配置文件</p>
+<p>@EnadleAutoConfiguration: 自动配置</p>
+<p>@ComponentScan:组件扫描 自动发现和配置一些Bean</p>
+<h3 id="restcontroller"><strong>@RestController</strong></h3>
+<p>@Controller和@ResponseBody的合集 表示这个是控制器bean 是REST风格的控制器</p>
+<h3 id="spring-aop"><strong>spring AOP</strong></h3>
+<p>aop的动态代理是Cglib代理（aop的原理也是动态代理  从spring boot 2.0后 默认Cglib代理  之前是有JDK代理的）</p>
+<p>PointCut(切点)：真正使用aop的方法</p>
+<p>Advice(通知)：定义aop何时被调用 以及执行的方法</p>
+<p>JoinPoint(链接点)：可以使用aop的地方（方法的前后）</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[数据库]]></title>
         <id>https://newbe1.github.io/post/shu-ju-ku</id>
@@ -150,10 +188,37 @@ chmod +x start.sh   赋权使其可执行
 
 ./start.sh 执行脚本
 </code></pre>
-<h2 id="文件-赋权">文件  赋权</h2>
+<h2 id="文件-权限">文件  权限</h2>
 <pre><code class="language-chown">chown user:market f01　　//把文件f01的主改为uesr，添加到market组
 chown -R liu /usr/meng  //将目录/usr/meng及其下面的所有文件、子目录的文件主改成 liu：
 </code></pre>
+<h2 id="防火墙基本操作">防火墙基本操作</h2>
+<p><strong>1.firewalld的基本使用</strong></p>
+<p>启动：  systemctl start firewalld</p>
+<p>查状态：systemctl status firewalld</p>
+<p>停止：  systemctl disable firewalld</p>
+<p>禁用：  systemctl stop firewalld</p>
+<p>在开机时启用一个服务：systemctl enable firewalld.service</p>
+<p>在开机时禁用一个服务：systemctl disable firewalld.service</p>
+<p>查看服务是否开机启动：systemctl is-enabled firewalld.service</p>
+<p>查看已启动的服务列表：systemctl list-unit-files|grep enabled</p>
+<p>查看启动失败的服务列表：systemctl --failed</p>
+<p><strong>2.配置firewalld-cmd</strong></p>
+<p>查看版本： firewall-cmd --version</p>
+<p>查看帮助： firewall-cmd --help</p>
+<p>显示状态： firewall-cmd --state</p>
+<p>查看所有打开的端口： firewall-cmd --zone=public --list-ports</p>
+<p>更新防火墙规则： firewall-cmd --reload</p>
+<p>查看区域信息:  firewall-cmd --get-active-zones</p>
+<p>查看指定接口所属区域： firewall-cmd --get-zone-of-interface=eth0</p>
+<p>拒绝所有包：firewall-cmd --panic-on</p>
+<p>取消拒绝状态： firewall-cmd --panic-off</p>
+<p>查看是否拒绝： firewall-cmd --query-panic</p>
+<p><strong>3.添加端口</strong></p>
+<p>添加端口80	firewall-cmd --add-port=80/tcp --permanent</p>
+<p>查端口80是否开启	firewall-cmd --query-port=80/tcp</p>
+<p>关闭80端口	 firewall-cmd --remove-port=80/tcp --permanent</p>
+<p>重新载入更新防火墙规则	firewall-cmd --reload</p>
 ]]></content>
     </entry>
     <entry>
@@ -175,7 +240,7 @@ chown -R liu /usr/meng  //将目录/usr/meng及其下面的所有文件、子目
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Java]]></title>
+        <title type="html"><![CDATA[Java基础]]></title>
         <id>https://newbe1.github.io/post/wo-de-bo-ke</id>
         <link href="https://newbe1.github.io/post/wo-de-bo-ke">
         </link>
@@ -202,16 +267,6 @@ chown -R liu /usr/meng  //将目录/usr/meng及其下面的所有文件、子目
 <p>操作少量数据用String</p>
 <p>单线程操作大量数据用StringBuilder</p>
 <p>多线程操作大量数据用StringBuffer</p>
-<h2 id="集合">集合</h2>
-<p>ArrayList和LinkedList 不是同步的  线程不安全</p>
-<p>ArrayList底层使用数组 LinkedList底层是双向链表</p>
-<p>ArrayList的增删受时间复杂度影响 LinkedList则不受（不支持高效的随机元素访问）</p>
-<h3 id="hashtable">HashTable</h3>
-<p>HashTable底层是数组和链表结合在一起实现的，key和value都不能为null（空指针异常），线程安全（修改数据时锁住整个HashTable）效率低，ConcurrentHashMap做了相关优化</p>
-<h3 id="hashmap">HashMap</h3>
-<p>底层是数组和链表实现的，key和value都可以为null，线程不安全</p>
-<h3 id="concurrenthashmap">ConcurrentHashMap</h3>
-<p>底层采用数组和链表实现，线程安全，key和value不能为null（空指针异常）</p>
 <h3 id="线程池的优势"><strong>线程池的优势</strong></h3>
 <p>降低资源消耗   通过重复利用已创建的线程降低线程创建消耗的资源</p>
 <p>提高响应速度 当任务到达时不需等待线程就可以立即执行</p>
@@ -243,25 +298,6 @@ chown -R liu /usr/meng  //将目录/usr/meng及其下面的所有文件、子目
 <p>服务端收到FIN发送一个ACK</p>
 <p>服务端关闭连接 发送一个FIN给客户端</p>
 <p>客户端发送一个ACK确认关闭</p>
-<h2 id="服务器相关">服务器相关</h2>
-<h3 id="tomcat和nginx">Tomcat和Nginx</h3>
-<p>Nginx在均衡负载里属于前端服务器，用来处理请求的转发（反向代理）；属于静态页面服务器，大部分时间不会运行项目。</p>
-<p>Tomcat是后端服务器，属于Java servlet容器，用来生成动态页面，直接运行项目。（发送一个请求，先经过Nginx，它会合理地将请求分配到后台比较不忙的Tomcat，Tomcat 处理好请求会将数据返回给Nginx，然后Nginx将数据返回给浏览器进行显示，如果是一些静态数据，Nginx会直接处理）</p>
-<p>Tomcat/Jetty 等都是Web 容器，负责管理整个Servlet的生命周期。类似Spring 的IOC会管理整个Bean的生命周期。 而GlassFish/Weblogic这一类的 application Server，则会管理更多，包含命名服务器，EJB等资源。</p>
-<p>Nginx/apache 可以说是web server ，它们可以处理静态资源，无法处理servlet，一般把Nginx放在前端处理静态资源，如果有对应的Servlet请求，则通过AJP转给后端服务器处理</p>
-<p>“tomcat用在java后台程序上，java后台程序难道不能用apache和nginx吗？”不能。apache和nginx不是servlet容器。什么是servlet容器呢？即实现HttpServletRequest、HttpServletResponse、HttpSession等等接口，解析http请求，通过类加载器加载对应的servlet实现类并调用。也就是说servlet容器必须由java或者基于jvm的语言实现。</p>
-<h2 id="spring">spring</h2>
-<h3 id="springbootapplication"><strong>@SpringBootApplication</strong></h3>
-<p>@SpringBootConfiguration:等同于spring 的xml配置文件</p>
-<p>@EnadleAutoConfiguration: 自动配置</p>
-<p>@ComponentScan:组件扫描 自动发现和配置一些Bean</p>
-<h3 id="restcontroller"><strong>@RestController</strong></h3>
-<p>@Controller和@ResponseBody的合集 表示这个是控制器bean 是REST风格的控制器</p>
-<h3 id="spring-aop"><strong>spring AOP</strong></h3>
-<p>aop的动态代理是Cglib代理（aop的原理也是动态代理  从spring boot 2.0后 默认Cglib代理  之前是有JDK代理的）</p>
-<p>PointCut(切点)：真正使用aop的方法</p>
-<p>Advice(通知)：定义aop何时被调用 以及执行的方法</p>
-<p>JoinPoint(链接点)：可以使用aop的地方（方法的前后）</p>
 <h2 id="io流"><strong>IO流</strong></h2>
 <p>![IO-操作方式分类](C:\Users\22215\Pictures\Saved Pictures\IO-操作方式分类.png)</p>
 <hr>
@@ -614,6 +650,95 @@ yum -y install iptables-services &amp;&amp; systemctl start iptables &amp;&amp; 
 </li>
 </ul>
 <p>worker_processes/4。</p>
+<h1 id="九-nginx配置高可用">九、Nginx配置高可用</h1>
+<h2 id="原理展示">原理展示</h2>
+<p>![](C:\Users\22215\Pictures\Saved Pictures\高可用.png)</p>
+<p>使用keepalived实现高可用,两台nginx(主备两台)安装此软件,绑定同一个虚拟IP用户通过这个虚拟IP进行访问nginx.其中一台挂了,则虚拟IP指向另外一台,请求不会受影响.</p>
+<h2 id="准备工作-5">准备工作</h2>
+<p>服务器两台,同时安装ngixn和keepalived</p>
+<p><strong>1. 安装keepalived</strong></p>
+<p>yum -y install keepalived</p>
+<p><strong>2. firewall-cmd --list-all</strong></p>
+<p>vi /etc/keepalived/keepalived.conf</p>
+<pre><code class="language-bash">global_defs {
+#   notification_email {
+#     acassen@firewall.loc
+#     failover@firewall.loc
+#     sysadmin@firewall.loc
+#   }
+#   notification_email_from Alexandre.Cassen@firewall.loc
+#   smtp_server 192.168.200.1
+#   smtp_connect_timeout 30
+   router_id dreamer1     #定义路由器标识信息，相同的局域网唯一，标识本节点的字条串,通常为hostname
+#   vrrp_skip_check_adv_addr
+#   vrrp_strict
+#   vrrp_garp_interval 0
+#   vrrp_gna_interval 0
+}
+vrrp_script chk_nginx {
+        script &quot;/etc/keepalived/nginx_check.sh&quot; ## 检测 nginx 状态的脚本路径
+        interval 2 ## 检测时间间隔
+        weight -20 ## 如果条件成立，权重-20
+}
+
+# 虚拟 IP 配置 vrrp
+vrrp_instance VI_1 {
+    state MASTER   # 状态参数 MASTER/BACKUP 仅表示说明，主节点为 MASTER， 对应的备份节点为 BACKUP 
+    interface ens33 # 绑定虚拟 IP 的网络接口，与本机 IP 地址所在的网络接口相同，ifconfig查看
+    virtual_router_id 51 #虚拟路由的 ID 号， 两个节点设置必须一样， 可选 IP 最后一段使用, 相同的 VRID 为一个组，他将决定多播的 MAC 地址
+   
+    priority 100  # 优先级决定是主还是备 --&gt; 越大越优先，节点优先级， 值范围 0-254， MASTER 要比 BACKUP 高
+    advert_int 1  # 主备心跳通讯时间间隔，组播信息发送间隔，两个节点设置必须一样， 默认 1s
+    authentication {  # 认证授权，设置验证信息，两个节点必须一致 
+        auth_type PASS
+        auth_pass 1111
+    }
+        track_script {
+                chk_nginx ## 执行 Nginx 监控的服务
+        }
+    virtual_ipaddress {  #设备之间使用的虚拟ip地址，可以定义多个
+        192.168.136.99
+        #192.168.200.17
+        #192.168.200.18
+    }
+}
+
+</code></pre>
+<p><strong>3. 编辑心跳脚本(监测nginx的状态 keepalived读取此脚本</strong></p>
+<p>touch /etc/keepalived/nginx_check.sh</p>
+<pre><code class="language-bash">#!/bin/bash
+counter=$(ps -C nginx --no-heading|wc -l)
+if [ &quot;${counter}&quot; = &quot;0&quot; ]; then
+    /usr/sbin/nginx
+    sleep 2
+    counter=$(ps -C nginx --no-heading|wc -l)
+    if [ &quot;${counter}&quot; = &quot;0&quot; ]; then
+        /etc/init.d/keepalived stop
+    fi
+fi
+</code></pre>
+<p><strong>4. 启动keepalived</strong></p>
+<p>systemctl start keepalived</p>
+<p><strong>5. 完成</strong></p>
+<p>此时就可以达到高可用的效果了</p>
+<h2 id="九-tomcat和nginx">九、Tomcat和Nginx</h2>
+<ul>
+<li>
+<p>Nginx在均衡负载里属于前端服务器，用来处理请求的转发（反向代理）；属于静态页面服务器，大部分时间不会运行项目。</p>
+</li>
+<li>
+<p>Tomcat是后端服务器，属于Java servlet容器，用来生成动态页面，直接运行项目。（发送一个请求，先经过Nginx，它会合理地将请求分配到后台比较不忙的Tomcat，Tomcat 处理好请求会将数据返回给Nginx，然后Nginx将数据返回给浏览器进行显示，如果是一些静态数据，Nginx会直接处理）</p>
+</li>
+<li>
+<p>Tomcat/Jetty 等都是Web 容器，负责管理整个Servlet的生命周期。类似Spring 的IOC会管理整个Bean的生命周期。 而GlassFish/Weblogic这一类的 application Server，则会管理更多，包含命名服务器，EJB等资源。</p>
+</li>
+<li>
+<p>Nginx/apache 可以说是web server ，它们可以处理静态资源，无法处理servlet，一般把Nginx放在前端处理静态资源，如果有对应的Servlet请求，则通过AJP转给后端服务器处理</p>
+</li>
+<li>
+<p>“tomcat用在java后台程序上，java后台程序难道不能用apache和nginx吗？”不能。apache和nginx不是servlet容器。什么是servlet容器呢？即实现HttpServletRequest、HttpServletResponse、HttpSession等等接口，解析http请求，通过类加载器加载对应的servlet实现类并调用。也就是说servlet容器必须由java或者基于jvm的语言实现。</p>
+</li>
+</ul>
 ]]></content>
     </entry>
 </feed>

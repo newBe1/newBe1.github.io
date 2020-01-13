@@ -165,13 +165,13 @@
                                 <span class="post-time">
                                 Date: <a href="#">2020-01-11</a>
                             </span>
-                                <span class="post-readtime">Reading Time:<a href="#">9.6 mins</a></span>
-                                <span class="post-words">words:<a href="#">2517</a></span>
+                                <span class="post-readtime">Reading Time:<a href="#">13.3 mins</a></span>
+                                <span class="post-words">words:<a href="#">3426</a></span>
                                 
                                     <span class="post-category">
                                 Category:
                                 
-                                <a href="https://newbe1.github.io/tag/sJ6iTsIj3">技术学习</a>
+                                <a href="https://newbe1.github.io/tag/DBcA9HmSr">服务器</a>
                                 
                             </span>
                                     
@@ -183,12 +183,12 @@
                                     YAN · RUI
                                 </a>
                                 <span class="post-time">&#x65E5;&#x671F;: <a href="#">2020-01-11</a></span>
-                                <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a href="#">9.6 &#x5206;&#x949F;</a></span>
-                                <span class="post-words">&#x5B57;&#x6570;:<a href="#">2517</a></span>
+                                <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a href="#">13.3 &#x5206;&#x949F;</a></span>
+                                <span class="post-words">&#x5B57;&#x6570;:<a href="#">3426</a></span>
                                 
                                     <span class="post-category">&#x5206;&#x7C7B;:
                                 
-                                <a href="https://newbe1.github.io/tag/sJ6iTsIj3">技术学习</a>
+                                <a href="https://newbe1.github.io/tag/DBcA9HmSr">服务器</a>
                                 
                             </span>
                                     
@@ -432,6 +432,95 @@ yum -y install iptables-services &amp;&amp; systemctl start iptables &amp;&amp; 
 </li>
 </ul>
 <p>worker_processes/4。</p>
+<h1 id="九-nginx配置高可用">九、Nginx配置高可用</h1>
+<h2 id="原理展示">原理展示</h2>
+<p>![](C:\Users\22215\Pictures\Saved Pictures\高可用.png)</p>
+<p>使用keepalived实现高可用,两台nginx(主备两台)安装此软件,绑定同一个虚拟IP用户通过这个虚拟IP进行访问nginx.其中一台挂了,则虚拟IP指向另外一台,请求不会受影响.</p>
+<h2 id="准备工作-5">准备工作</h2>
+<p>服务器两台,同时安装ngixn和keepalived</p>
+<p><strong>1. 安装keepalived</strong></p>
+<p>yum -y install keepalived</p>
+<p><strong>2. firewall-cmd --list-all</strong></p>
+<p>vi /etc/keepalived/keepalived.conf</p>
+<pre><code class="language-bash">global_defs {
+#   notification_email {
+#     acassen@firewall.loc
+#     failover@firewall.loc
+#     sysadmin@firewall.loc
+#   }
+#   notification_email_from Alexandre.Cassen@firewall.loc
+#   smtp_server 192.168.200.1
+#   smtp_connect_timeout 30
+   router_id dreamer1     #定义路由器标识信息，相同的局域网唯一，标识本节点的字条串,通常为hostname
+#   vrrp_skip_check_adv_addr
+#   vrrp_strict
+#   vrrp_garp_interval 0
+#   vrrp_gna_interval 0
+}
+vrrp_script chk_nginx {
+        script &quot;/etc/keepalived/nginx_check.sh&quot; ## 检测 nginx 状态的脚本路径
+        interval 2 ## 检测时间间隔
+        weight -20 ## 如果条件成立，权重-20
+}
+
+# 虚拟 IP 配置 vrrp
+vrrp_instance VI_1 {
+    state MASTER   # 状态参数 MASTER/BACKUP 仅表示说明，主节点为 MASTER， 对应的备份节点为 BACKUP 
+    interface ens33 # 绑定虚拟 IP 的网络接口，与本机 IP 地址所在的网络接口相同，ifconfig查看
+    virtual_router_id 51 #虚拟路由的 ID 号， 两个节点设置必须一样， 可选 IP 最后一段使用, 相同的 VRID 为一个组，他将决定多播的 MAC 地址
+   
+    priority 100  # 优先级决定是主还是备 --&gt; 越大越优先，节点优先级， 值范围 0-254， MASTER 要比 BACKUP 高
+    advert_int 1  # 主备心跳通讯时间间隔，组播信息发送间隔，两个节点设置必须一样， 默认 1s
+    authentication {  # 认证授权，设置验证信息，两个节点必须一致 
+        auth_type PASS
+        auth_pass 1111
+    }
+        track_script {
+                chk_nginx ## 执行 Nginx 监控的服务
+        }
+    virtual_ipaddress {  #设备之间使用的虚拟ip地址，可以定义多个
+        192.168.136.99
+        #192.168.200.17
+        #192.168.200.18
+    }
+}
+
+</code></pre>
+<p><strong>3. 编辑心跳脚本(监测nginx的状态 keepalived读取此脚本</strong></p>
+<p>touch /etc/keepalived/nginx_check.sh</p>
+<pre><code class="language-bash">#!/bin/bash
+counter=$(ps -C nginx --no-heading|wc -l)
+if [ &quot;${counter}&quot; = &quot;0&quot; ]; then
+    /usr/sbin/nginx
+    sleep 2
+    counter=$(ps -C nginx --no-heading|wc -l)
+    if [ &quot;${counter}&quot; = &quot;0&quot; ]; then
+        /etc/init.d/keepalived stop
+    fi
+fi
+</code></pre>
+<p><strong>4. 启动keepalived</strong></p>
+<p>systemctl start keepalived</p>
+<p><strong>5. 完成</strong></p>
+<p>此时就可以达到高可用的效果了</p>
+<h2 id="九-tomcat和nginx">九、Tomcat和Nginx</h2>
+<ul>
+<li>
+<p>Nginx在均衡负载里属于前端服务器，用来处理请求的转发（反向代理）；属于静态页面服务器，大部分时间不会运行项目。</p>
+</li>
+<li>
+<p>Tomcat是后端服务器，属于Java servlet容器，用来生成动态页面，直接运行项目。（发送一个请求，先经过Nginx，它会合理地将请求分配到后台比较不忙的Tomcat，Tomcat 处理好请求会将数据返回给Nginx，然后Nginx将数据返回给浏览器进行显示，如果是一些静态数据，Nginx会直接处理）</p>
+</li>
+<li>
+<p>Tomcat/Jetty 等都是Web 容器，负责管理整个Servlet的生命周期。类似Spring 的IOC会管理整个Bean的生命周期。 而GlassFish/Weblogic这一类的 application Server，则会管理更多，包含命名服务器，EJB等资源。</p>
+</li>
+<li>
+<p>Nginx/apache 可以说是web server ，它们可以处理静态资源，无法处理servlet，一般把Nginx放在前端处理静态资源，如果有对应的Servlet请求，则通过AJP转给后端服务器处理</p>
+</li>
+<li>
+<p>“tomcat用在java后台程序上，java后台程序难道不能用apache和nginx吗？”不能。apache和nginx不是servlet容器。什么是servlet容器呢？即实现HttpServletRequest、HttpServletResponse、HttpSession等等接口，解析http请求，通过类加载器加载对应的servlet实现类并调用。也就是说servlet容器必须由java或者基于jvm的语言实现。</p>
+</li>
+</ul>
 
                         </div>
                         <div class="post-toc">
@@ -520,6 +609,13 @@ yum -y install iptables-services &amp;&amp; systemctl start iptables &amp;&amp; 
 <li><a href="#%E8%BF%9E%E6%8E%A5%E6%95%B0-worker_connection">连接数 worker_connection</a></li>
 </ul>
 </li>
+<li><a href="#%E4%B9%9D-nginx%E9%85%8D%E7%BD%AE%E9%AB%98%E5%8F%AF%E7%94%A8">九、Nginx配置高可用</a>
+<ul>
+<li><a href="#%E5%8E%9F%E7%90%86%E5%B1%95%E7%A4%BA">原理展示</a></li>
+<li><a href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C-5">准备工作</a></li>
+<li><a href="#%E4%B9%9D-tomcat%E5%92%8Cnginx">九、Tomcat和Nginx</a></li>
+</ul>
+</li>
 </ul>
 
                         </div>
@@ -564,7 +660,7 @@ yum -y install iptables-services &amp;&amp; systemctl start iptables &amp;&amp; 
                                 <span class="tag">
                                 
                                 
-                                <a href="https://newbe1.github.io/tag/sJ6iTsIj3"># 技术学习</a>
+                                <a href="https://newbe1.github.io/tag/DBcA9HmSr"># 服务器</a>
                                 
                                 
                             </span>
@@ -582,7 +678,7 @@ yum -y install iptables-services &amp;&amp; systemctl start iptables &amp;&amp; 
                                 <span class="tag">
                                 
                                 
-                                <a href="https://newbe1.github.io/tag/sJ6iTsIj3"># 技术学习</a>
+                                <a href="https://newbe1.github.io/tag/DBcA9HmSr"># 服务器</a>
                                 
                                 
                             </span>
@@ -597,7 +693,7 @@ yum -y install iptables-services &amp;&amp; systemctl start iptables &amp;&amp; 
                         <section class="post-nav">
                             
                                 <a class="prev" rel="prev" href="https://newbe1.github.io/post/wo-de-bo-ke">
-                                    Java
+                                    Java基础
                                 </a>
                                 
                                     
