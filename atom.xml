@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://newbe1.github.io/</id>
     <title>YAN · RUI</title>
-    <updated>2020-01-13T06:13:16.307Z</updated>
+    <updated>2020-01-13T06:42:22.542Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://newbe1.github.io/"/>
     <link rel="self" href="https://newbe1.github.io/atom.xml"/>
@@ -54,8 +54,8 @@
         <link href="https://newbe1.github.io/post/shu-ju-ku">
         </link>
         <updated>2020-01-12T10:49:52.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="数据库">数据库</h2>
-<h3 id="数据库性能优化"><strong>数据库性能优化</strong></h3>
+        <content type="html"><![CDATA[<h1 id="数据库">数据库</h1>
+<h2 id="数据库性能优化"><strong>数据库性能优化</strong></h2>
 <p><em>sql优化</em>：</p>
 <p>​			少使用select*；</p>
 <p>​			只查询一条记录时使用 limit 1；</p>
@@ -170,6 +170,202 @@
 <p>5.—-添加外键约束 (主表stuInfo和从表stuMarks建立关系，关联字段stuNo)</p>
 <p>alter table stuInfo</p>
 <p>add constraint FK_stuNo foreign key(stuNo)references stuinfo(stuNo)</p>
+<h1 id="linux安装mysql">Linux安装mysql</h1>
+<h2 id="1检查操作系统是否自带mysql">1.检查操作系统是否自带mysql</h2>
+<pre><code>[root@localhost local]# rpm -qa|grep mysqlmysql-libs-5.1.73-8.el6_8.x86_64
+</code></pre>
+<p>比如我这里自带了一个mysql。</p>
+<p>使用yum命令，因为yum命令可以自动删除与mysql相关的依赖；如果使用rpm命令，则还需要手动去删除和mysql相关的文件</p>
+<pre><code>[root@localhost local]# yum -y remove mysql-libs-5.1.73-8.el6_8.x86_64
+</code></pre>
+<p>检查删除是否成功。如果没有提示则删除成功。</p>
+<pre><code>[root@localhost local]# rpm -qa|grep mysql
+</code></pre>
+<h2 id="2下载mysql57">2.下载mysql5.7</h2>
+<p>mysql官网 https://dev.mysql.com/downloads/mysql/5.7.html#downloads</p>
+<figure data-type="image" tabindex="1"><img src="https://img-blog.csdn.net/20180811133327731?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<p>将下载的安装包&quot;mysql-5.7.21-linux-glibc2.12-x86_64.tar.gz&quot;利用xftp上传至**/usr/local**下</p>
+<p>解压</p>
+<pre><code>[root@localhost local]# tar -zxvf mysql-5.7.21-linux-glibc2.12-x86_64.tar.gz
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://img-blog.csdn.net/20180811133512504?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<p>顺手删除mysql5.7的源码包</p>
+<pre><code>[root@localhost local]# rm -f mysql-5.7.21-linux-glibc2.12-x86_64.tar.gz
+</code></pre>
+<p>修改文件名</p>
+<pre><code>[root@localhost local]# mv mysql-5.7.21-linux-glibc2.12-x86_64/ mysql57
+</code></pre>
+<p>进入/mysql57创建data文件夹</p>
+<pre><code>[root@localhost local]# cd mysql57/[root@localhost mysql57]# mkdir data
+</code></pre>
+<h2 id="3创建mysql用户组和mysql用户">3.创建mysql用户组和mysql用户</h2>
+<pre><code>#查看有没有mysql组[root@localhost mysql57]# cat /etc/group | grep mysql查看有没有mysql用户[root@localhost mysql57]# cat /etc/passwd |grep mysql若没有则创建mysql组#创建mysql用户组[root@localhost mysql57]# groupadd mysql#创建mysql用户并添加到mysql用户组中(//useradd -r参数表示mysql用户是系统用户，不可用于登录系统；第一个mysql是用户组，第二个mysql是用户) [root@localhost mysql57]# useradd -r -g mysql mysql#检查用户组是否创建成功[root@localhost mysql57]# groups mysql
+</code></pre>
+<h2 id="4设置mysql目录访问权限用户组">4.设置mysql目录访问权限，用户组</h2>
+<pre><code>#将mysql目录访问权限赋为myql用户[root@localhost mysql57]# chown -R mysql /usr/local/mysql57#改变mysql目录的用户组属于mysql组[root@localhost mysql57]# chgrp -R mysql /usr/local/mysql57#查看mysql目录下所有的目录及文件夹所属组合用户[root@localhost mysql57]# cd /usr/local/mysql57[root@localhost mysql57]# lltotal 56drwxr-xr-x  2 mysql mysql  4096 Aug 11 21:24 bin-rw-r--r--  1 mysql mysql 17987 Dec 28  2017 COPYINGdrwxr-xr-x  2 mysql mysql  4096 Aug 11 21:40 datadrwxr-xr-x  2 mysql mysql  4096 Aug 11 21:24 docsdrwxr-xr-x  3 mysql mysql  4096 Aug 11 21:23 includedrwxr-xr-x  5 mysql mysql  4096 Aug 11 21:24 libdrwxr-xr-x  4 mysql mysql  4096 Aug 11 21:23 man-rw-r--r--  1 mysql mysql  2478 Dec 28  2017 READMEdrwxr-xr-x 28 mysql mysql  4096 Aug 11 21:24 sharedrwxr-xr-x  2 mysql mysql  4096 Aug 11 21:24 support-files
+</code></pre>
+<p>权限被修改</p>
+<figure data-type="image" tabindex="3"><img src="https://img-blog.csdn.net/20180811135338835?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<h2 id="5配置mysql">5.配置mysql</h2>
+<p>创建以下文件，设置访问权限，用于mysql配置中</p>
+<p>第一步：创建文件/tmp/mysql.sock。并设置权限</p>
+<p>创建文件</p>
+<pre><code>[root@localhost mysql57]# mkdir tmp[root@localhost mysql57]# cd tmp[root@localhost tmp]# lltotal 0[root@localhost tmp]# touch mysql.sock[root@localhost tmp]# lltotal 0-rw-r--r-- 1 root root 0 Aug 11 21:59 mysql.sock
+</code></pre>
+<p>设置权限</p>
+<pre><code>[root@localhost tmp]# chown -R mysql:mysql /usr/local/mysql57/tmp/mysql.sock[root@localhost tmp]# chmod 755 /usr/local/mysql57/tmp/mysql.sock
+</code></pre>
+<p>第二步：创建/log/mysqld.log。并设置权限</p>
+<pre><code>[root@localhost mysql57]# mkdir log[root@localhost mysql57]# cd log[root@localhost log]# lltotal 0[root@localhost log]# touch mysqld.log[root@localhost log]# chown -R mysql:mysql /usr/local/mysql57/log/mysqld.log[root@localhost log]# chmod 755 /usr/local/mysql57/log/mysqld.log
+</code></pre>
+<p>如果出错，说明路径没有写全，要写绝对路径</p>
+<p>第三步：创建/tmp/mysqld.pid。并设置权限</p>
+<pre><code>[root@localhost log]# cd ../tmp[root@localhost tmp]# touch mysqld.pid[root@localhost tmp]# chown -R mysql:mysql /usr/local/mysql57/tmp/mysqld.pid [root@localhost tmp]# chmod 755 /usr/local/mysql57/tmp/mysqld.pid 
+</code></pre>
+<h2 id="6初始化mysql">6.初始化mysql</h2>
+<pre><code>[root@localhost mysql57]# bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql57/ --datadir=/usr/local/mysql57/data/
+</code></pre>
+<p>可能会报错。报错信息</p>
+<pre><code>bin/mysqld: error while loading shared libraries: libnuma.so.1: cannot open shared object file: No such file or directory
+</code></pre>
+<p>解决方法：<br>
+原因：<br>
+yum安装的是libnuma.so.1，但安装时默认安装的是32的，而db2需要的是64位的<br>
+1.如果已经安装了libnuma.so.1，先yum remove libnuma.so.1</p>
+<pre><code>[root@localhost mysql57]# yum remove libnuma.so.1
+</code></pre>
+<p>2.安装依赖包 yum -y install numactl.x86_64</p>
+<pre><code>[root@localhost mysql57]# yum -y install numactl.x86_64
+</code></pre>
+<p>安装完成后重新，执行</p>
+<pre><code>[root@localhost mysql57]# bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql57/ --datadir=/usr/local/mysql57/data/
+</code></pre>
+<p>安装成功</p>
+<figure data-type="image" tabindex="4"><img src="https://img-blog.csdn.net/20180811144440951?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<p>配置SSL参数（在mysql目录下）</p>
+<pre><code>[root@localhost mysql57]# bin/mysql_ssl_rsa_setup --datadir=/usr/local/mysql57/data/
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="https://img-blog.csdn.net/20180811144745248?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<p>由于mysql-5.7.23版本my.cnf不在/support-files下，故我们创建my.cnf文件。</p>
+<pre><code>[root@localhost mysql57]# touch /etc/my.cnf[root@localhost mysql57]# vim /etc/my.cnf
+</code></pre>
+<p>复制如下内容（每个人安装路径可能不一样，需要修改）：</p>
+<pre><code>[mysqld]character_set_server=utf8init_connect='SET NAMES utf8'basedir=/usr/local/mysql57datadir=/usr/local/mysql57/dataport = 3306socket=/tmp/mysql.socklog-error=/usr/local/mysql57/log/mysqld.logpid-file=/usr/local/mysql57/tmp/mysqld.pid#表名不区分大小写lower_case_table_names = 1max_connections=5000sql_mode=STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+</code></pre>
+<p>配置完成</p>
+<h2 id="7启动mysql">7.启动mysql</h2>
+<h3 id="方式一">方式一</h3>
+<pre><code>[root@localhost mysql57]# bin/mysqld_safe --user=mysql &amp;
+</code></pre>
+<figure data-type="image" tabindex="6"><img src="https://img-blog.csdn.net/20180811145534278?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<p>查看mysql的运行情况</p>
+<pre><code>[root@localhost mysql57]# ps -ef |grep mysql
+</code></pre>
+<p>第一我没有成功，因为我有个地方出问题了。我在方式二配置成功。</p>
+<h3 id="方式二">方式二</h3>
+<p><strong>配置mysql自动启动（可根据需要配置）</strong></p>
+<pre><code>[root@localhost mysql57]# cp support-files/mysql.server /etc/init.d/mysql[root@localhost mysql57]# vim /etc/init.d/mysql
+</code></pre>
+<p>添加配置（<strong>i</strong> 进入编辑；<strong>esc--&gt; :wq</strong>保存退出）</p>
+<figure data-type="image" tabindex="7"><img src="https://img-blog.csdn.net/20180811151743694?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<p>若配置了mysql自启动方式则可以使用服务方式启动mysql</p>
+<pre><code>#查看mysql状态/etc/init.d/mysql status 或者 service mysql status#启动mysql/etc/init.d/mysql start 或者 service mysql start#停止mysql/etc/init.d/mysql stop 或者 service mysql stop#重新启动mysql/etc/init.d/mysql restart 或者 service mysql restart查看mysql服务说明启动成功ps -ef|grep mysql
+</code></pre>
+<p>启动mysql</p>
+<pre><code>[root@localhost tmp]# service mysql startStarting MySQL. ERROR! The server quit without updating PID file (/usr/local/mysql57/tmp/mysqld.pid).
+</code></pre>
+<p>报错了，上面说没有/usr/local/mysql57/tmp/mysqld.pid。</p>
+<p>解决方案：</p>
+<p>a)创建文件/usr/local/mysql57/tmp/mysqld.pid</p>
+<p>b)修改权限</p>
+<p>修改存放mysqld.pid文件目录的权限</p>
+<pre><code>chown -R mysql /usr/local/mysql57/tmpchgrp -R mysql /usr/local/mysql57/tmpchmod 777 /usr/local/mysql57/tmp
+</code></pre>
+<p>重新启动成功（如果还不行，就是中间某个步骤写错了。或者直接把mysql目录权限赋为777）</p>
+<pre><code>[root@localhost tmp]# /etc/init.d/mysql startStarting MySQL. SUCCESS! 
+</code></pre>
+<h2 id="8配置mysql到环境变量">8.配置mysql到环境变量</h2>
+<pre><code>[root@localhost tmp]# vim /etc/profile
+export MYSQL57_HOME=/usr/local/mysql57/bin #mysql5.7/bin路径export PATH=$PATH:${MYSQ57_HOME}
+</code></pre>
+<figure data-type="image" tabindex="8"><img src="https://img-blog.csdn.net/20180811154113533?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<p>这个地方是冒号 ( ：)</p>
+<p>设置环境变量立即生效</p>
+<pre><code>[root@localhost tmp]# source /etc/profile
+</code></pre>
+<h2 id="9mysql忘记密码">9.mysql忘记密码</h2>
+<p>切换到mysql下的bin目录</p>
+<pre><code>[root@localhost bin]# ./mysql -u root -pEnter password: ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+</code></pre>
+<p>ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)</p>
+<p>密码错误。。而且之前安装的密码也忘记了</p>
+<p>解决方案：</p>
+<h3 id="第一步跳过mysql的密码认证过程">第一步：跳过MySQL的密码认证过程</h3>
+<p>(注：windows下修改的是my.ini)</p>
+<pre><code>[root@localhost bin]# #vim /etc/my.cnf
+</code></pre>
+<p>在[mysqld]后面任意一行添加“skip-grant-tables”用来跳过密码验证的过程，如下图所示：</p>
+<figure data-type="image" tabindex="9"><img src="https://img-blog.csdn.net/20180811155411769?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<p>保存并退出(esc--&gt; :wq)</p>
+<h3 id="第二步重启mysql">第二步：重启mysql</h3>
+<pre><code>[root@localhost bin]# /etc/init.d/mysql restartShutting down MySQL.. SUCCESS! Starting MySQL. SUCCESS!
+</code></pre>
+<h3 id="第三步登录mysql">第三步：登录mysql</h3>
+<p>进入mysql/bin目录，启动mysql</p>
+<pre><code>[root@localhost bin]# ./mysql
+</code></pre>
+<p>启动成功</p>
+<figure data-type="image" tabindex="10"><img src="https://img-blog.csdn.net/20180811155702817?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<h3 id="第四步使用sql语句修改密码">第四步：使用sql语句修改密码</h3>
+<pre><code class="language-sql">mysql&gt; use mysql;mysql&gt; update user set authentication_string=password(&quot;你的新密码&quot;) where user=&quot;root&quot;;mysql&gt; flush privileges;mysql&gt; quit
+</code></pre>
+<p>注意：mysql5.7没有password字段</p>
+<pre><code>ERROR 1054 (42S22): Unknown column 'password' in 'field list'
+</code></pre>
+<h3 id="第五步重新编辑mycnf">第五步：重新编辑my.cnf</h3>
+<p>去掉[mysqld]后面的“skip-grant-tables”</p>
+<pre><code>[root@localhost bin]# vim /etc/my.cnf 
+</code></pre>
+<h3 id="第六步重启mysql">第六步：重启mysql</h3>
+<pre><code>[root@localhost bin]# /etc/init.d/mysql restart
+</code></pre>
+<figure data-type="image" tabindex="11"><img src="https://img-blog.csdn.net/20180811161048595?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<h2 id="10设置mysql远程登录">10.设置mysql远程登录</h2>
+<p>先本地登录mysql</p>
+<pre><code>[root@localhost bin]# ./mysql -uroot -pEnter password: Welcome to the MySQL monitor.  Commands end with ; or \g.Your MySQL connection id is 2Server version: 5.7.21 Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved. Oracle is a registered trademark of Oracle Corporation and/or itsaffiliates. Other names may be trademarks of their respectiveowners. Type 'help;' or '\h' for help. Type '\c' to clear the current input statement. 
+</code></pre>
+<h3 id="报错">报错</h3>
+<p>突然报错</p>
+<p>ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.</p>
+<pre><code>mysql&gt; use mysqlERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.
+</code></pre>
+<p>解决方案：需要重新修改一下密码</p>
+<pre><code>mysql&gt; alter user 'root'@'localhost' identified by '修改的密码';mysql&gt; flush privileges;mysql&gt; quit;
+</code></pre>
+<h3 id="继续配置">继续配置</h3>
+<pre><code>mysql&gt; use mysql;mysql&gt; update  user  set host='%' where user='root';mysql&gt; GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'%' IDENTIFIED BY 'mypwd' WITH GRANT OPTION;mysql&gt; FLUSH PRIVILEGES; mysql&gt; quit;
+</code></pre>
+<figure data-type="image" tabindex="12"><img src="https://img-blog.csdn.net/20180811162227907?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<h3 id="重启mysql">重启mysql</h3>
+<pre><code>[root@localhost bin]# service mysql restart;
+</code></pre>
+<figure data-type="image" tabindex="13"><img src="https://img-blog.csdn.net/20180811162257498?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<h3 id="设置防火墙">设置防火墙</h3>
+<p>a)配置防火墙开启3306端口</p>
+<pre><code>[root@localhost bin]# /sbin/iptables -I INPUT -p tcp --dport 3306-j ACCEPT[root@localhost bin]# /etc/rc.d/init.d/iptables saveiptables: Saving firewall rules to /etc/sysconfig/iptables:   [  OK  ][root@localhost bin]# /etc/rc.d/init.d/iptables restartiptables: Setting chains to policy ACCEPT: filter         	[  OK  ]iptables: Flushing firewall rules:                     	[  OK  ]iptables: Unloading modules:                       	[  OK  ]iptables: Applying firewall rules:                    	[  OK  ]
+</code></pre>
+<p>b)临时关闭防火墙</p>
+<pre><code>[root@localhost bin]# service iptables stop
+</code></pre>
+<p>c)永久关闭防火墙</p>
+<p>重启后永久生效</p>
+<pre><code>[root@localhost bin]# chkconfig iptables off
+</code></pre>
+<h3 id="远程连接mysql">远程连接mysql</h3>
+<p>连接成功</p>
+<figure data-type="image" tabindex="14"><img src="https://img-blog.csdn.net/20180811162708303?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="15"><img src="https://img-blog.csdn.net/20180811162738485?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3UxNjE1MzAyNDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" loading="lazy"></figure>
+<p>参考博客：</p>
 ]]></content>
     </entry>
     <entry>
