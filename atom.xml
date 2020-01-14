@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://newbe1.github.io/</id>
     <title>YAN · RUI</title>
-    <updated>2020-01-13T06:42:22.542Z</updated>
+    <updated>2020-01-14T09:17:58.752Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://newbe1.github.io/"/>
     <link rel="self" href="https://newbe1.github.io/atom.xml"/>
@@ -34,14 +34,114 @@
         <link href="https://newbe1.github.io/post/spring">
         </link>
         <updated>2020-01-13T06:05:21.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="spring">spring</h2>
-<h3 id="springbootapplication"><strong>@SpringBootApplication</strong></h3>
+        <content type="html"><![CDATA[<h1 id="spring">spring</h1>
+<h2 id="注解">注解</h2>
+<h3 id="springbootapplication">@SpringBootApplication</h3>
 <p>@SpringBootConfiguration:等同于spring 的xml配置文件</p>
 <p>@EnadleAutoConfiguration: 自动配置</p>
 <p>@ComponentScan:组件扫描 自动发现和配置一些Bean</p>
 <h3 id="restcontroller"><strong>@RestController</strong></h3>
 <p>@Controller和@ResponseBody的合集 表示这个是控制器bean 是REST风格的控制器</p>
-<h3 id="spring-aop"><strong>spring AOP</strong></h3>
+<h2 id="基本信息">基本信息</h2>
+<figure data-type="image" tabindex="1"><img src="https://newbe1.github.io//post-images/1578993463637.png" alt="" loading="lazy"></figure>
+<p><strong>Spring框架的核心就是IoC（控制反转）和AOP（面向切面编程）</strong></p>
+<h2 id="特点">特点</h2>
+<ol>
+<li>方便解耦,简化开发(IOC)</li>
+<li>方便集成各种框架</li>
+<li>低入侵性,无需实现spring的接口就可以使用其中封装的方法</li>
+<li>面向切面编程aop</li>
+</ol>
+<h2 id="spring-ioc">spring IOC</h2>
+<p>将创建对象的工作反转交给spring ioc容器 , 对代码进行解耦</p>
+<p>传统模式下我们通过new的方法创建对象,这样的做法使代码的耦合度高,spring利用ioc容器统一去管理和创建对象,由ioc控制外部资源对该对象或文件的获取.</p>
+<p>方法一 . ioc使用反射机制通过工厂模式读取xml文件或properties文件创建一个JavaBean容器来管理对象(工厂模式解耦)</p>
+<pre><code class="language-java">public class BeanFactory {
+
+    //定义一个properties对象
+    private static Properties props;
+
+    //定义一个map 用来存储配置文件种的key-value 就是容器
+    private static Map&lt;String, Object&gt; beans;
+
+    //使用静态代码块 为props赋值
+    static {
+        try {
+            //实例化properties对象
+            props = new Properties();
+            //获取配置文件的流对象  在入系统中的所有Resource文件
+            InputStream is = BeanFactory.class.getClassLoader().getResourceAsStream(&quot;bean.properties&quot;);
+            props.load(is);
+            //实例化容器
+            beans = new HashMap&lt;String, Object&gt;();
+            //取出配置文件中的值
+            Enumeration keys = props.keys();
+            //遍历枚举
+            while (keys.hasMoreElements()){
+                String key = keys.nextElement().toString();
+                //反射建立对象
+                Object value = Class.forName(props.getProperty(key)).newInstance();
+                //将key-value存入容器
+                beans.put(key,value);
+            }
+        } catch (Exception e) {
+            throw new ExceptionInInitializerError(&quot;初始化properties失败&quot;);
+        }
+    }
+
+    //获取配置文件值
+    public static Object get(String key){
+        return beans.get(key);
+    }
+
+//    public static void main(String[] args) {
+//        System.out.println(get(&quot;IAccountDao&quot;));
+//    }
+}
+</code></pre>
+<p>创建bean.properties</p>
+<pre><code class="language-java">IAccountDao=com.yan.dao.impl.AccountDaoImpl
+IAccountService=com.yan.service.impl.AccountServiceImpl 
+</code></pre>
+<p>创建对象</p>
+<pre><code class="language-java">//IAccountDao iAccountDao = new IAccountDao()
+IAccountDao iAccountDao = (IAccountDao)BeanFactory.get(&quot;IAccountDao&quot;);  //此对象为单例对象只被创建一次
+
+
+
+
+public class AccountDaoImpl implements IAccountDao{
+    int i =0 ;
+    public void saveDao() {
+        for (int a =0 ; a &lt;3 ; a ++){
+            System.out.println(i);
+            i++;
+            System.out.println(&quot;保存成功&quot;);
+        }
+    }
+}
+//
+输出0
+保存成功
+1
+保存成功
+2
+保存成功
+单例对象中的成员变量也就初始化一次
+</code></pre>
+<ul>
+<li>
+<p>注解</p>
+<p>JavaBean : 可重用组件 用来创建service和dao对象</p>
+<p>在配置文件中配置service和dao对象  格式(唯一标识符=权限定类名)</p>
+<p>读取配置文件(可以是xml或properties)的内容,反射创建对象</p>
+<p>ioc创建的对象默认是单例对象( 当scope设置为prototype的时为多例   <em>@Scope(value=&quot;prototype&quot;) //创建多实例</em>  )</p>
+<p><strong>singleton（单例）</strong>:共享一个实例对象,对象类中的成员变量也只会初始化一次(节约资源)</p>
+<p><strong>prototype（多例）</strong> :对这个bean的每次请求都会创建一个新的bean实例 (防止并发问题线程安全)</p>
+</li>
+</ul>
+<h2 id="spring-aop"><strong>spring AOP</strong></h2>
+<p>针对目标对象进行动态代理</p>
 <p>aop的动态代理是Cglib代理（aop的原理也是动态代理  从spring boot 2.0后 默认Cglib代理  之前是有JDK代理的）</p>
 <p>PointCut(切点)：真正使用aop的方法</p>
 <p>Advice(通知)：定义aop何时被调用 以及执行的方法</p>
