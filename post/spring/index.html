@@ -63,7 +63,7 @@
 <h3 id="restcontroller"><strong>@RestController</strong></h3>
 <p>@Controller和@ResponseBody的合集 表示这个是控制器bean 是REST风格的控制器</p>
 <h2 id="基本信息">基本信息</h2>
-<figure data-type="image" tabindex="1"><img src="https://newbe1.github.io//post-images/1578993463637.png" alt="" loading="lazy"></figure>
+<p>![](C:\Users\22215\Pictures\Saved Pictures\936870-20160922153752027-1272044443.png)</p>
 <p><strong>Spring框架的核心就是IoC（控制反转）和AOP（面向切面编程）</strong></p>
 <h2 id="特点">特点</h2>
 <ol>
@@ -75,7 +75,85 @@
 <h2 id="spring-ioc">spring IOC</h2>
 <p>将创建对象的工作反转交给spring ioc容器 , 对代码进行解耦</p>
 <p>传统模式下我们通过new的方法创建对象,这样的做法使代码的耦合度高,spring利用ioc容器统一去管理和创建对象,由ioc控制外部资源对该对象或文件的获取.</p>
-<p>方法一 . ioc使用反射机制通过工厂模式读取xml文件或properties文件创建一个JavaBean容器来管理对象(工厂模式解耦)</p>
+<h3 id="容器生成方法">容器生成方法</h3>
+<p><strong>方法一:</strong> ioc使用反射机制通过工厂模式读取xml文件创建一个JavaBean容器来管理对象(工厂模式解耦)这个接口为BeanFactory</p>
+<p>读取配置文件时不会创建对象,只在用时创建( 延迟实例化 )</p>
+<ul>
+<li>应用启动的时候占用资源很少适用于对资源要求较高的应用</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Object getBean(String name) throws BeansException;<T> T getBean(String name, Class<T> requiredType) throws BeansException;Object getBean(String name, Object... args) throws BeansException;<T> T getBean(Class<T> requiredType) throws BeansException;<T> T getBean(Class<T> requiredType, Object... args) throws BeansException;</td>
+<td>多个getBean的方法，可以通过Bean的name（by name），也可以通过bean的类型（by type）。</td>
+</tr>
+<tr>
+<td>boolean containsBean(String name);</td>
+<td>是否包含Bean</td>
+</tr>
+<tr>
+<td>boolean isSingleton(String name) throws NoSuchBeanDefinitionException;</td>
+<td>Bean是否是单例，这里需要注意的是，默认情况下，Bean都是以单例形式存在的，与其相反的是原型模式的Bean，当我们创建了一个原型模式下的Bean，IoC容器就会创建一个新的Bean返回给调用者，这与Bean的作用域有关。</td>
+</tr>
+<tr>
+<td>boolean isPrototype(String name) throws NoSuchBeanDefinitionException;</td>
+<td>Bean是否是原型，也就是&quot;多例&quot;</td>
+</tr>
+<tr>
+<td>boolean isTypeMatch(String name, ResolvableType typeToMatch) throws NoSuchBeanDefinitionException;boolean isTypeMatch(String name, Class&lt;?&gt; typeToMatch) throws NoSuchBeanDefinitionException;</td>
+<td>是否类型匹配</td>
+</tr>
+<tr>
+<td>Class&lt;?&gt; getType(String name) throws NoSuchBeanDefinitionException;</td>
+<td>获取Bean的类型</td>
+</tr>
+<tr>
+<td>String[] getAliases(String name);</td>
+<td>获取Bean的别名</td>
+</tr>
+</tbody>
+</table>
+<p><strong>方法二:</strong> 在Spring的发展中，在BeanFactory的基础上，还设计了一个更为高级的接口，ApplicationContext，它通过继承上级接口进而继承BeanFactory，它在BeanFactory的基础上，扩展了消息国际化接口(MessageSource)、环境可配置接口(EnvironmentCapable)、应用事件接口(ApplicationEventPublisher)和资源模式解析接口(ResourcePatternResolver)。那么，BeanFactory有的方法ApplicationContext自然也会有，后面的示例就直接用ApplicationContext进行。</p>
+<p>ApplicationContext接口有以下3个常用实现类，可以实例化任何一个类来创建Spring的ApplicationContext容器。</p>
+<p>读取配置文件生成容器的时候就会创建对象( 不延迟实例化 )</p>
+<ul>
+<li>所有的Bean在启动的时候都加载，系统运行的速度快；</li>
+<li>在启动的时候所有的Bean都加载了，我们就能在系统启动的时候，尽早的发现系统中的配置问题</li>
+<li>建议web应用，在启动的时候就把所有的Bean都加载了。（把费时的操作放到系统启动中完成)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ApplicationContext实现类</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ClassPathXmlApplicationContext</td>
+<td>它可以从当前类路径中检索配置文件并装载它来创建容器的实例</td>
+</tr>
+<tr>
+<td>FileSystemXmlApplicationContext</td>
+<td>它和ClassPathXmlApplicationContext唯一的区别在于读取配置文件的方式，它不在从类路径下获取配置文件，它可以通过指定位置的方式读取配置文件，还可以获取类路径之外的资源</td>
+</tr>
+<tr>
+<td>AnnotationConfigApplicationContext</td>
+<td>它一般在使用注解方式配置Bean的时候，通过指定配置类的方式创建容器实例</td>
+</tr>
+</tbody>
+</table>
+<p>总结:</p>
+<ul>
+<li>ApplicationContext 适用于创建单例对象 , BeanFactory适用于创建多例对象</li>
+</ul>
+<h3 id="模仿的一个beanfactory类"><strong>模仿的一个BeanFactory类</strong></h3>
 <pre><code class="language-java">public class BeanFactory {
 
     //定义一个properties对象
@@ -154,12 +232,274 @@ public class AccountDaoImpl implements IAccountDao{
 <p>注解</p>
 <p>JavaBean : 可重用组件 用来创建service和dao对象</p>
 <p>在配置文件中配置service和dao对象  格式(唯一标识符=权限定类名)</p>
-<p>读取配置文件(可以是xml或properties)的内容,反射创建对象</p>
-<p>ioc创建的对象默认是单例对象( 当scope设置为prototype的时为多例   <em>@Scope(value=&quot;prototype&quot;) //创建多实例</em>  )</p>
-<p><strong>singleton（单例）</strong>:共享一个实例对象,对象类中的成员变量也只会初始化一次(节约资源)</p>
-<p><strong>prototype（多例）</strong> :对这个bean的每次请求都会创建一个新的bean实例 (防止并发问题线程安全)</p>
+<p>ioc创建的对象默认是单例对象( 当scope设置为prototype的时为多例   <em><strong>@Scope(value=&quot;prototype&quot;</strong>) //创建多实例</em>  )</p>
+<p>***singleton（单例）***:共享一个实例对象,对象类中的成员变量也只会初始化一次(节约资源)</p>
+<p><em><strong>prototype（多例）</strong></em> :对这个bean的每次请求都会创建一个新的bean实例 (防止并发问题线程安全) ,当一个bean是多例模式的情况下，lazy-init为false或者default无效</p>
+<p><u>使用标准</u>:当对象在请求中会被改变状态的话(存在类成员变量)就使用多例,反之单例</p>
+<p>举例: 数据库连接池就是单例模式，有且仅有一个连接池管理者，管理多个连接池对象。</p>
 </li>
 </ul>
+<h3 id="ioc的两种使用方法xml配置-注解">IOC的两种使用方法(xml配置  注解)</h3>
+<h4 id="xml配置"><strong>xml配置</strong></h4>
+<p>通过在xml文件中配置bean标签进行依赖和注入:</p>
+<ol>
+<li>
+<p><strong>bean标签作用</strong></p>
+<p>用于配置spring容器管理bean对象</p>
+</li>
+<li>
+<p><strong>bean标签的属性</strong></p>
+<ul>
+<li>
+<p>id：给对象在容器中提供一个唯一标识。用于获取对象。</p>
+</li>
+<li>
+<p>class：指定类的全限定名。用于反射创建对象。默认情况下调用无参构造函数,若没有无参构造方法则无法创建对象</p>
+</li>
+<li>
+<p>scope：指定对象的作用范围。</p>
+</li>
+<li>
+<p>singleton：默认值，单例的（在整个容器中只有一个对象）.</p>
+<ul>
+<li>prototype：多例的</li>
+<li>request：将Spring 创建的 Bean 对象存入到 request 域中.</li>
+<li>session：将Spring 创建的 Bean 对象存入到 session 域中.</li>
+<li>global session：WEB 项目中,应用在 Portlet 环境.如果没有 Portlet 环境那么globalSession 相当于 session。</li>
+</ul>
+</li>
+<li>
+<p>init-method：指定类中的初始化方法名称。</p>
+</li>
+<li>
+<p>destroy-method：指定类中销毁方法名称。比如DataSource的配置中一般需要指定destroy-method=“close”。</p>
+</li>
+<li>
+<p>lazy-init：ApplicationContext实现的默认行为就是在启动时将所有 singleton bean进行实例化。</p>
+</li>
+<li>
+<p>lazy-init可以延迟初始化，设置lazy-init=&quot;true&quot;使得Ioc容器在第一次需要bean的时候进行实例化。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>bean标签的作用范围</strong></p>
+</li>
+</ol>
+<p>通过在xml的bean标签的scope进行配置</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">作用域</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">singleton</td>
+<td style="text-align:left">单例模式，singleton是默认的作用域，当定义Bean时没有指定scope配置项，Bean的作用域被默认为singleton。singleton属于单例模式，在整个系统上下文环境中，仅有一个Bean实例。</td>
+</tr>
+<tr>
+<td style="text-align:center">prototype</td>
+<td style="text-align:left">原型模式，当一个Bean的作用域被定义prototype时，程序每次从IOC容器获取的Bean都是一个新的实例。</td>
+</tr>
+<tr>
+<td style="text-align:center">request</td>
+<td style="text-align:left">http请求，bean作用于HTTP request生命周期，每个request有通过bean创建的实例。</td>
+</tr>
+<tr>
+<td style="text-align:center">session</td>
+<td style="text-align:left">会话，bean作用于session生命周期。</td>
+</tr>
+<tr>
+<td style="text-align:center">global-session</td>
+<td style="text-align:left">全局会话，bean作用于全局的session生命周期。</td>
+</tr>
+</tbody>
+</table>
+<ol start="4">
+<li>
+<p><strong>bean的三种实例化方法</strong></p>
+<p>无参构造 (若对象中无 无参构造方法则实例化失败)</p>
+<pre><code class="language-xml">&lt;bean id=&quot;wanger&quot; class=&quot;com.luis.dto.Person&quot;&gt;&lt;/bean&gt; 
+</code></pre>
+<p>静态工厂(通过静态工厂中提供的方法实例化对象)</p>
+<pre><code class="language-xml">&lt;bean id=&quot;person&quot; class=&quot;com.luis.factory.StaticFactory&quot; factory-method=&quot;createPerson&quot;/&gt;
+</code></pre>
+<p>实例工厂  (先实例化工厂再使用工厂中的方法实例化需要的对象)</p>
+<pre><code class="language-xml">&lt;bean id=&quot;instancFactory&quot; class=&quot;com.luis.factory.PersonFactory&quot;/&gt;
+&lt;bean id=&quot;person&quot; factory-bean=&quot;instancFactory&quot; factory-method=&quot;createPerson&quot;/&gt;
+</code></pre>
+</li>
+</ol>
+<p>5.<strong>依赖注入</strong></p>
+<p>带参方法注入</p>
+<pre><code class="language-xml">&lt;bean id=&quot;IAccountService&quot; class=&quot;com.yan.service.impl.AccountServiceImpl&quot;&gt;
+        &lt;constructor-arg name=&quot;name&quot; value=&quot;afas&quot;&gt;&lt;/constructor-arg&gt;
+        &lt;constructor-arg name=&quot;age&quot; value=&quot;12&quot;&gt;&lt;/constructor-arg&gt;
+&lt;/bean&gt;
+</code></pre>
+<p>set方法注入</p>
+<pre><code class="language-xml">&lt;bean id=&quot;IAccountService&quot; class=&quot;com.yan.service.impl.AccountServiceImpl&quot; scope=&quot;prototype&quot;&gt;
+        &lt;property name=&quot;namefa&quot; value=&quot;张氏&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;age&quot; value=&quot;12&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+</code></pre>
+<p>p名称空间注入</p>
+<pre><code class="language-xml">&lt;bean id=&quot;IAccountService&quot; class=&quot;com.yan.service.impl.AccountServiceImpl&quot; p:name=&quot;zhangs&quot; p:age=&quot;12&quot; p:date-ref=&quot;now&quot;&gt;
+    &lt;/bean&gt;
+    &lt;bean id=&quot;now&quot; class=&quot;java.util.Date&quot;&gt;&lt;/bean&gt;
+</code></pre>
+<h4 id="注解-2">注解</h4>
+<ol>
+<li><strong>bean标识注解</strong></li>
+</ol>
+<ul>
+<li>@Component : 组件通用注解  常用于model类</li>
+<li>@Controller : 常用于对controller控制类进行标注</li>
+<li>@Service : 常用于对Service类进行标注</li>
+<li>@ Repository : 常用于对dao类进行标注</li>
+</ul>
+<p>这些注解功能一样都是用来创建bean对象的,可以互换,不同的业务层使用不同的注解使业务逻辑更加清晰</p>
+<ol start="2">
+<li><strong>bean属性注入</strong></li>
+</ol>
+<ul>
+<li>@Value ：注入普通类型属性</li>
+<li>@Resource ：注入对象类型</li>
+<li>@Autowired ：注入对象类型，默认按照类型注入。结合@Qualifier注解完成按名称的注入。</li>
+</ul>
+<ol start="3">
+<li><strong>bean的作用范围注解@Scope</strong></li>
+</ol>
+<ul>
+<li>加在类上控制创建的类是单例还是多例的(默认单例)</li>
+<li>@Scope取值
+<ul>
+<li>singleton ：单例</li>
+<li>prototype ：多例</li>
+<li>request ：request域，需要在web环境</li>
+<li>session ：session域，需要在web环境</li>
+<li>application： context域，需要在web环境</li>
+<li>globalsession 集群环境的session域，需要在web环境</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li><strong>bean的生命周期注解</strong></li>
+</ol>
+<ul>
+<li>@PostConstruct ：相当于init-method</li>
+<li>@PreDestroy ：相当于destroy-method</li>
+</ul>
+<p><strong>例子</strong></p>
+<pre><code class="language-java">@Component(value = &quot;accountService&quot;)
+public class AccountServiceImpl implements IAccountService {
+
+    @Value(&quot;zhangs&quot;)
+    private String name;
+
+    @Value(&quot;12&quot;)
+    private Integer age;
+
+    private Date date;
+
+
+    //name 和 User对象的注入ioc的唯一标识符相同  User类中@Component(&quot;user&quot;)
+    //    @Qualifier(&quot;user&quot;)
+    //    @Autowired   效果一致
+    @Resource(name = &quot;user&quot;)
+    private User user;
+
+    public AccountServiceImpl(String name,Integer age , Date date , User user) {
+        this.name = name;
+        this.age = age;
+        this.date = date;
+        this.user = user;
+        System.out.println(&quot;带参构造对象&quot;);
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public AccountServiceImpl() {
+        System.out.println(&quot;无参构造对象&quot;);
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    //private IAccountDao iAccountDao=null;
+    public void save() {
+//            iAccountDao =  (IAccountDao) BeanFactoryDiy.get(&quot;IAccountDao&quot;);
+//            iAccountDao.saveDao();
+            System.out.println(&quot;保存成功&quot;);
+    }
+
+    @Override
+    public String toString() {
+        return &quot;AccountServiceImpl{&quot; +
+                &quot;name='&quot; + name + '\'' +
+                &quot;, age=&quot; + age +
+                &quot;, date=&quot; + date +
+                &quot;, user=&quot; + user +
+                '}';
+    }
+
+    @PostConstruct
+    public void init(){
+        System.out.println(&quot;初始化方法-----&quot;);
+    }
+
+    @PreDestroy
+    public void destory(){
+        System.out.println(&quot;销毁方法------&quot;);
+    }
+}
+</code></pre>
+<pre><code class="language-java">@Component(&quot;user&quot;)
+public class User {
+
+    @Value(&quot;root&quot;)
+    private String username;
+
+    @Value(&quot;root&quot;)
+    private String password;
+
+    public User() {
+        System.out.println(&quot;无参构建user&quot;);
+    }
+
+    public User(String username , String password) {
+        this.username = username;
+        this.password = password;
+        System.out.println(&quot;带参构建user&quot;);
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;User{&quot; +
+                &quot;username='&quot; + username + '\'' +
+                &quot;, password='&quot; + password + '\'' +
+                '}';
+    }
+}
+
+</code></pre>
 <h2 id="spring-aop"><strong>spring AOP</strong></h2>
 <p>针对目标对象进行动态代理</p>
 <p>aop的动态代理是Cglib代理（aop的原理也是动态代理  从spring boot 2.0后 默认Cglib代理  之前是有JDK代理的）</p>

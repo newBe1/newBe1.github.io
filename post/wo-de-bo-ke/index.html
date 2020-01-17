@@ -54,7 +54,7 @@
                 </header>
                 <div class="grap">
 					  <p class="with-img"><img width="1139" height="759" src="http://px.thea.cn/Public/Upload/Uploadfiles/image/20171031/20171031151252_29917.png" class="attachment-full size-full wp-post-image" alt="Java基础" /></p>
-					<h2 id="java数据类型">Java数据类型</h2>
+					<h1 id="java数据类型">Java数据类型</h1>
 <h3 id="short"><strong>short</strong></h3>
 <p>对于short s1 = 1; s1 = s1 + 1; 由于s1+1运算时会自动提升表达式的类型，所以结果是int型，再赋值给short类型s1时，编译器将报告需要强制转换类型的错误</p>
 <p>short s1 = 1; s1 += 1;由于 += 是java语言规定的运算符，java编译器会对它进行特殊处理，因此可以正确编译。</p>
@@ -80,7 +80,7 @@
 <p>降低资源消耗   通过重复利用已创建的线程降低线程创建消耗的资源</p>
 <p>提高响应速度 当任务到达时不需等待线程就可以立即执行</p>
 <p>提高线程的可管理性  使用线程池统一分配管理和优化</p>
-<h2 id="java网络">Java网络</h2>
+<h1 id="java网络">Java网络</h1>
 <h3 id="osi七层模型"><strong>osi七层模型</strong></h3>
 <p>物理层</p>
 <p>数据链路层</p>
@@ -107,9 +107,65 @@
 <p>服务端收到FIN发送一个ACK</p>
 <p>服务端关闭连接 发送一个FIN给客户端</p>
 <p>客户端发送一个ACK确认关闭</p>
-<h2 id="io流"><strong>IO流</strong></h2>
+<h1 id="反射">反射</h1>
+<p><strong>定义</strong>:在运行状态下,对任意一个类,都能制度这个类的所有属性和方法;对于任意对象,都能调用它的方法和属性;这种动态获取信息和调用对象的方法叫做Java的反射机制.</p>
+<h1 id="io流"><strong>IO流</strong></h1>
 <p>![IO-操作方式分类](C:\Users\22215\Pictures\Saved Pictures\IO-操作方式分类.png)</p>
 <hr>
+<h1 id="多态">多态</h1>
+<p>多态存在的三个必要条件</p>
+<p>1.继承</p>
+<p>2.重写</p>
+<p>3.父类引用指向子类对象</p>
+<p><strong>例子</strong></p>
+<pre><code class="language-java">	public class duotai {
+    public static void main(String[] args) {
+        //Animal animal1 = new Animal()   抽象类无法直接实例化  只能通过实例化其子类 来初始化这个类
+
+        Animal animal = new Cat();  //向上转型
+
+        show(animal);
+    }
+
+    public static void show(Animal animal){
+        animal.eat();  //能使用从父类中继承的方法  调用的是子类中的方法
+
+        //类型判断
+        if(animal instanceof Cat){
+            Cat cat = (Cat) animal;   //向下转型
+            cat.work();               //可以使用子类独有的work 方法了
+        }else if(animal instanceof Dog){
+            Dog dog = (Dog) animal;
+            dog.work();
+        }
+    }
+}
+
+abstract class Animal{
+    abstract void eat();
+}
+
+ class Cat extends Animal{    //继承Animal类 则必须实现Animal中的方法 可以进行重写 可以添加自己的独有方法
+    public void eat(){
+        System.out.println(&quot;吃鱼&quot;);
+    }
+
+    public void work() {
+        System.out.println(&quot;抓老鼠&quot;);
+    }
+}
+
+ class Dog extends Animal{
+    public void eat(){
+        System.out.println(&quot;吃骨头&quot;);
+    }
+
+    public void work() {
+        System.out.println(&quot;看门&quot;);
+    }
+}
+
+</code></pre>
 <h1 id="杂的">杂的</h1>
 <h3 id="和的区别"><strong>&amp;和&amp;&amp;的区别</strong></h3>
 <p>都是逻辑与运算符 都可以表示与（and）</p>
